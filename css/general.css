@@ -370,3 +370,55 @@ body::before {
         opacity: 1;
     }
 }
+
+.card {
+    width: 100%;
+    height: 100%;
+    /* background: rgb(17, 4, 134); */
+    border-radius: 15px;
+    box-shadow: rgb(0, 0, 0, 0.7) 5px 10px 50px, rgb(0, 0, 0, 0.7) -5px 0px 250px;
+    display: flex;
+    color: rgb(0, 0, 0);
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: rgb(0, 0, 0) 5px 10px 50px, rgb(0, 0, 0) -5px 0px 250px;
+}
+
+.time-text {
+    font-size: 50px;
+    margin-top: 0px;
+    margin-left: 15px;
+    font-weight: 600;
+}
+
+.time-sub-text {
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.day-text {
+    font-size: 18px;
+    margin-top: 0px;
+    margin-left: 15px;
+    font-weight: 500;
+
+}
+
+.moon {
+    font-size: 20px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover>.moon {
+    font-size: 23px;
+}
