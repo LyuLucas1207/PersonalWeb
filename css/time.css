@@ -1,0 +1,104 @@
+.time_card {
+    position: absolute;
+    width: 20vw;
+    height: 12vw;
+    display: flex;
+    color: rgb(0, 0, 0);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    border-radius: 2vh;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .time_card {
+        border-radius: 2vw;
+        width: 20vh;
+        height: 12vh;
+    }
+    
+}
+
+.time_card:hover {
+    box-shadow: rgb(0, 0, 0) 0.5vw 1vw 5vw, rgb(0, 0, 0) -0.5vw 0vw 25vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .time_card:hover {
+        box-shadow: rgb(0, 0, 0) 0.5vh 1vh 5vh, rgb(0, 0, 0) -0.5vh 0vh 25vh;
+    }
+    
+}
+
+
+@media screen and (max-width: 1000px) {
+    .time_card:hover>.moon {
+        font-size: 2.3vh;
+    }
+    
+}
+
+.time-text {
+    font-size: 4.5vh;
+    margin: 0vw;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1000px) {
+    .time-text {
+        font-size: 5vw;
+    }
+}
+
+.time-sub-text {
+    font-size: 1.5vh;
+    margin-left: 0.5vh;
+}
+
+@media screen and (max-width: 1000px) {
+    .time-sub-text {
+        font-size: 2vw;
+        margin-left: 0.5vw;
+    }
+}
+
+.day-text {
+    font-size: 1.8vh;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 1000px) {
+    .day-text {
+        font-size: 2.5vw;
+    }
+}
+
+.moon,.sun {
+    font-size: 2vw;
+    position: absolute;
+    top:1.5vh;
+    right: 1.5vh;
+    transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 1000px) {
+    .moon,.sun {
+        font-size: 2vh;
+        top:1vh;
+        right: 1vh;
+    }
+}
+
+.time_card:hover>.moon,.time_card:hover>.sun {
+    font-size: 2.3vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .time_card:hover>.moon,.time_card:hover>.sun {
+        font-size: 2.3vh;
+    }
+}

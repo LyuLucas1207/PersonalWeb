@@ -1,0 +1,145 @@
+
+.section-banner,
+.earth {
+    height: 10vw;
+    width: 10vw;
+    position: absolute;
+}
+
+
+.earth {
+    transition: left 0.3s linear;
+    background: url(../img/CardImg/earth.jpg);
+    background-size: cover;
+    animation: earthRotate 30s linear 0s infinite;
+    border-radius: 50%;
+    box-shadow: 
+        0vh 0vh 2vh rgba(255, 255, 255, 0.2), -0.5vh 0vh 0.8vh rgba(255, 255, 255, 0.788) inset,
+        1.5vh 0.2vh 2.5vh rgb(0, 0, 0) inset, -2.4vh -0.2vh 3.4vh rgba(255, 255, 255, 0.758) inset,
+        10vh 0vh 4.4vh rgba(0, 0, 0, 0.628) inset, 15vh 0vh 3.8vh rgba(175, 168, 168, 0.025) inset;
+    transition: all 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .section-banner,
+    .earth {
+        height: 10vh;
+        width: 10vh;
+    }
+
+    .earth {
+        box-shadow: 
+            0vw 0vw 2vw rgba(255, 255, 255, 0.2), -0.5vw 0vw 0.8vw rgba(255, 255, 255, 0.788) inset,
+            1.5vw 0.2vw 2.5vw rgb(0, 0, 0) inset, -2.4vw -0.2vw 3.4vw rgba(255, 255, 255, 0.758) inset,
+            10vw 0vw 4.4vw rgba(0, 0, 0, 0.628) inset, 15vw 0vw 3.8vw rgba(175, 168, 168, 0.025) inset;
+    }
+}
+
+@keyframes earthRotate {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100vh 0;
+    }
+}
+
+@media scren and (max-width: 1000px) {
+    @keyframes earthRotate {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 50vw 0;
+        }
+    }
+
+}
+
+
+.center_inner_lighting_container:hover .earth {
+    box-shadow: 0vh 0vh 2vh rgba(255, 255, 255, 0.2), -0.5vh 0vh 0.8vh rgba(255, 255, 255, 0),
+        1.5vh 0.2vh 2.5vh rgb(0, 0, 0), -2.4vh -0.2vh 3.4vh rgba(255, 255, 255, 0.553),
+        25vh 0vh 4.4vh rgba(0, 0, 0, 0.628), 15vh 0vh 3.8vh rgba(175, 168, 168, 0.025);
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 1000px) {
+    .center_inner_lighting_container:hover .earth {
+        box-shadow: 0vw 0vw 2vw rgba(255, 255, 255, 0.2), -0.5vw 0vw 0.8vw rgba(255, 255, 255, 0),
+            1.5vw 0.2vw 2.5vw rgb(0, 0, 0), -2.4vw -0.2vw 3.4vw rgba(255, 255, 255, 0.553),
+            25vw 0vw 4.4vw rgba(0, 0, 0, 0.628), 15vw 0vw 3.8vw rgba(175, 168, 168, 0.025);
+    }
+
+
+}
+
+
+.curved-corner-star {
+    display: flex;
+    position: relative;
+}
+
+.curved-corner-bottomleft,
+.curved-corner-bottomright,
+.curved-corner-topleft,
+.curved-corner-topright {
+    width: 0.6vh;
+    height: 0.8vh;
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+
+
+.curved-corner-bottomleft:before,
+.curved-corner-bottomright:before,
+.curved-corner-topleft:before,
+.curved-corner-topright:before {
+    content: "";
+    display: block;
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.curved-corner-bottomleft:before {
+    bottom: 0;
+    left: 0;
+    box-shadow: -0.5vh 0.5vh 0 0 white;
+}
+
+.curved-corner-bottomright:before {
+    bottom: 0;
+    right: 0;
+    box-shadow: 0.5vh 0.5vh 0 0 white;
+}
+
+.curved-corner-topleft:before {
+    top: 0;
+    left: 0;
+    box-shadow: -0.5vh -0.5vh 0 0 white;
+}
+
+.curved-corner-topright:before {
+    top: 0;
+    right: 0;
+    box-shadow: 0.5vh -0.5vh 0 0 white;
+}
+
+@keyframes twinkling {
+
+    0%,
+    100% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
