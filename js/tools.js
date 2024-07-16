@@ -162,16 +162,40 @@ function greeting_model(greeting, accordingToTime, showingTime) {
     else greeting = '晚上好，' + greeting;
   }
 
-  // 设置问候语文本
-  modalContent.textContent = greeting;
+  /*创建一个p和一个button，button用于重新加载整个页面*/
+  const greetingP = document.createElement('p');
+  greetingP.textContent = greeting;
+  const ButtonContainer = document.createElement('div');
+  ButtonContainer.className = 'button_container';
+  const reloadButton = document.createElement('button');
+  reloadButton.textContent = '重新加载';
+  reloadButton.addEventListener('click', function () {
+    location.reload();
+  });
+  const BackgroundButton = document.createElement('button');
+  BackgroundButton.textContent = '切换背景';
+  /*直到消失可以无数次点击 ‘切换背景’ 按钮*/
+  BackgroundButton.addEventListener('click', function () {
+    /*randomBackgroundGenerator*/
+    randomBackgroundGenerator(1, 12);
+  });
+  ButtonContainer.appendChild(BackgroundButton);
+  ButtonContainer.appendChild(reloadButton);
+
+  modalContent.appendChild(greetingP);
+  modalContent.appendChild(ButtonContainer);
 
   // 将模态窗口添加到文档中
   document.body.appendChild(modalBackground);
 
-  // 点击背景关闭模态窗口
-  modalBackground.addEventListener('click', function () {
-    document.body.removeChild(modalBackground);
+  // 点击modalContent以外部分关闭模态窗口
+  modalBackground.addEventListener('click', function (e) {
+    if (!modalContent.contains(e.target)) {
+      document.body.removeChild(modalBackground);
+    }
   });
+
+
 
   // 设置自动消失
   setTimeout(() => {
