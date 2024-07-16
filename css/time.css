@@ -50,7 +50,8 @@
 
 @media screen and (max-width: 1000px) {
     .time-text {
-        font-size: 5vw;
+        font-size: 4vw;
+        font-size: min(4vw, 15px);
     }
 }
 
@@ -63,6 +64,7 @@
     .time-sub-text {
         font-size: 2vw;
         margin-left: 0.5vw;
+        font-size: min(2vw, 8px);
     }
 }
 
@@ -74,6 +76,8 @@
 @media screen and (max-width: 1000px) {
     .day-text {
         font-size: 2.5vw;
+        font-size: min(2.5vw, 12px);
+      
     }
 }
 

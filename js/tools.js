@@ -135,6 +135,81 @@ function showContent(loaderSelector, time = 5) {
 
 }
 
+/*
+selector: 选择器, 选择头像元素
+greeting: 问候语
+greeting_model: 问候语
+=======================Export===========================
+avatarExpand: 头像展开
+*/
+function greeting_model(greeting, accordingToTime, showingTime) {
+  if (greeting === null) return;  // 如果问候语是 null，则不创建模态窗口
+
+  // 创建模态窗口的背景和内容元素
+  const modalBackground = document.createElement('div');
+  modalBackground.className = 'modal-background';
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+  modalBackground.appendChild(modalContent);
+
+  // 根据时间和条件添加问候语
+  if (accordingToTime) {
+    const currentTime = new Date();
+    const hour = currentTime.getHours();
+    if (hour < 6) greeting = '深夜好，' + greeting;
+    else if (hour < 12) greeting = '早上好，' + greeting;
+    else if (hour < 18) greeting = '下午好，' + greeting;
+    else greeting = '晚上好，' + greeting;
+  }
+
+  // 设置问候语文本
+  modalContent.textContent = greeting;
+
+  // 将模态窗口添加到文档中
+  document.body.appendChild(modalBackground);
+
+  // 点击背景关闭模态窗口
+  modalBackground.addEventListener('click', function () {
+    document.body.removeChild(modalBackground);
+  });
+
+  // 设置自动消失
+  setTimeout(() => {
+    if (document.body.contains(modalBackground)) {
+      document.body.removeChild(modalBackground);
+    }
+  }, showingTime * 1000);
+}
+
+
+function avatarExpand(selector, selector_cover = null, greeting = null, accordingToTime = false, showingTime = 3) {
+  const avatar = document.querySelector(selector);
+  /*绘制页面model*/
+  greeting_model(greeting, accordingToTime, showingTime)
+  /*拼接selector_cover*/
+  if (selector_cover === null) {
+    selector_cover = selector + '_cover';
+  }
+  const avatarCover = avatar.querySelector(selector_cover);
+  avatar.addEventListener('click', function (e) {
+    if (!this.classList.contains('expanded')) {
+      this.classList.add('expanded');
+      avatarCover.style.transform = 'scale(0.99)'; // Apply scale when expanded
+    } else {
+      this.classList.remove('expanded');
+      avatarCover.style.transform = 'scale(1)'; // Reset scale when contracted
+    }
+    e.stopPropagation(); // Stop the click from propagating to document
+  });
+
+  // Add event listener to the document to handle clicks outside the avatar
+  document.addEventListener('click', function (e) {
+    if (avatar.classList.contains('expanded') && !avatar.contains(e.target)) {
+      avatar.classList.remove('expanded');
+      avatarCover.style.transform = 'scale(1)'; // Reset scale when clicking outside
+    }
+  });
+}
 
 /*
 随机生成背景图片
@@ -159,7 +234,6 @@ function generateRandomBackground(min, max, minformat, maxformat) {
     return './img/Background/background_1.png';
   }
 }
-
 function checkImage(src) {
   return new Promise((resolve) => {
     let img = new Image();
@@ -172,7 +246,6 @@ function checkImage(src) {
     img.src = src;
   });
 }
-
 async function randomBackgroundGenerator(min, max) {
   let body = document.querySelector('body');
   let exitPic = false;
@@ -212,12 +285,10 @@ function generateStarPosition(num, unit, range) {
   }
   return position;
 }
-
 function generateStar(num, range) {
   let sectionBanner = document.querySelector('.section-banner');
   let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
   let position = generateStarPosition(num, unit, range);
-
   for (let i = 0; i < num; i++) {
     let starDiv = document.createElement('div');
     starDiv.id = `star-${i}`;
@@ -227,7 +298,6 @@ function generateStar(num, range) {
     starDiv.style.top = position[i].top;
     starDiv.style.left = `calc(50% + ${position[i].left})`;
     starDiv.style.top = `calc(50% + ${position[i].top})`;
-    /*generate random twinkling time from 1 to 5*/
     starDiv.style.animation = `twinkling ${Math.floor(Math.random() * 5 + 1)}s infinite`;
 
     let star_up = document.createElement('div');
@@ -253,7 +323,6 @@ function generateStar(num, range) {
     sectionBanner.appendChild(starDiv);
   }
 }
-
 function controlStar(num, range, selector) {
   generateStar(num, range);
   window.addEventListener('resize', function () {
@@ -275,7 +344,6 @@ generateMoonSVG: 生成月亮svg
 =======================Export===========================
 createTimeCard: 创建时间卡片
 */
-
 function getCurrentTime(format24Hour) {
   const now = new Date();
   let hours = now.getHours();
@@ -329,7 +397,6 @@ function getCurrentTime(format24Hour) {
   const timeString = `${hours}:${minutes}:${seconds}`;
   return { timeString, ampm };
 }
-// 获取当前日期
 function getCurrentDay() {
   const now = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -427,11 +494,17 @@ function createTimeCard(selector) {
 
 
 export {
+  /*loader*/
   initializeLoader,
   checkResourcesLoaded,
   showContent,
   minLoadTime,
+  /*avatar*/
+  avatarExpand,
+  /*background*/
   randomBackgroundGenerator, 
+  /*star*/
   controlStar, 
+  /*time card*/
   createTimeCard
 };
