@@ -148,7 +148,7 @@ function greeting_model(greeting, accordingToTime, showingTime, flag = 'loaderAf
     }
   }, showingTime * 1000);
 }
-function avatarExpand(selector, selector_cover = null, greeting = null, accordingToTime = false, showingTime = 3) {
+function avatarExpand(selector, selector_cover = null, greeting = null, accordingToTime = false, showingTime = 3, name = 'Mortal.LZ') {
   const avatar = document.querySelector(selector);
   greeting_model(greeting, accordingToTime, showingTime, 'loaderAfter');
   if (selector_cover === null) {
@@ -159,17 +159,10 @@ function avatarExpand(selector, selector_cover = null, greeting = null, accordin
     const avatarImg = avatarCover.querySelector('.avatar_img');
     if (!this.classList.contains('expanded')) {
       this.classList.add('expanded');
-      const circle = helpers.elementWithClass('div', 'circle');
-      circle.style.width = `${avatarImg.offsetWidth}px`;
-      circle.style.height = `${avatarImg.offsetHeight}px`;
-      circle.style.position = 'absolute';
-      circle.style.borderRadius = '50%';
-      circle.style.backgroundColor = 'rgba(255, 255, 255, 0)';
-      circle.style.transition = 'transform 0.5s';
-      avatarImg.appendChild(circle);
-      circle.addEventListener('click', function (e) {
+      // coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(255,255,255,0)', flagOfInnerFunction = false, executeFunction = null)
+      helpers.coverOnElement('.avatar_img', '50%', 'rgba(255,255,255,0.1)', true, function (e) {
         randomImgGenerator(1, 12, 1, 1, '.avatar_img', './img/Avatar/avatar');
-        e.stopPropagation(); // 阻止 circle 上的点击事件冒泡
+        e.stopPropagation();
       });
     } else {
       this.classList.remove('expanded');
@@ -181,10 +174,31 @@ function avatarExpand(selector, selector_cover = null, greeting = null, accordin
     e.stopPropagation(); // Stop the click from propagating to avatarCover
   });
 
+  avatarCover.addEventListener('click', function (e) {
+    if (this.classList.contains('expanded')) {
+      const avatarName = helpers.elementWithClass('div', 'avatar_name');
+      avatarName.textContent = name;
+      avatarName.style.animation = 'colorChange 1s forwards';
+      this.appendChild(avatarName);
+      helpers.coverOnElement('.avatar_name', '0', 'rgba(255, 255, 255, 0)', false, null);
+    } else {
+      const avatarName = this.querySelector('.avatar_name');
+      if (avatarName) {
+        this.removeChild(avatarName);
+      }
+    }
+    e.stopPropagation(); // Stop the click from propagating to avatarCover
+  });
+
+
   document.addEventListener('click', function (e) {
     const avatarImg = avatarCover.querySelector('.avatar_img');
     if (avatarCover.classList.contains('expanded') && !avatar.contains(e.target)) {
       avatarCover.classList.remove('expanded');
+      const avatarName = avatarCover.querySelector('.avatar_name');
+      if (avatarName) {
+        avatarCover.removeChild(avatarName);
+      }
       const circle = avatarImg.querySelector('.circle');
       if (circle) {
         avatarImg.removeChild(circle);
