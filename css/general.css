@@ -37,6 +37,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'YouSheYuFeiTeJianKangTi', 'HongLeiXingShuJianTi', 'SmileySans-Oblique', 'AlimamaFangYuanTiVF-Thin', 'MaoKenWangXingYuan';
 }
 
 body {
@@ -55,7 +56,6 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 0.2vh 0.2vh rgb(255, 255, 255) inset;
-    font-family: 'YouSheYuFeiTeJianKangTi', 'HongLeiXingShuJianTi', 'SmileySans-Oblique', 'AlimamaFangYuanTiVF-Thin', 'MaoKenWangXingYuan';
 }
 
 body::-webkit-scrollbar {

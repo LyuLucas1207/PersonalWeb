@@ -2,60 +2,83 @@
     position: fixed;
     top: 2vw;
     left: 2vw;
-    width: 4vw;
-    height: 4vw;
-    border-radius: 3vw;
-    background-color: rgba(249, 249, 249, 0.456);
-    border-color: rgb(255, 255, 255);
-    border-style: solid;
+    width: max-content;
+    height: max-content;
+    border-radius: 7.5vw;
+    background-color: rgba(255, 255, 255, 0.406);
     z-index: 1;
-    transition: width 1s, border-radius 1s, box-shadow 1s;
+
 }
 
 @media screen and (max-width: 1000px) {
     .avatar {
         top: 2vh;
         left: 2vh;
-        width: 4vh;
-        height: 4vh;
-        border-radius: 3vh;
     }
-    
 }
 
-.expanded {
-    width: 12vw;
+
+
+.avatar_cover,
+.avatar_img {
+    height: 4vw;
+    width: 4vw;
     border-radius: 7.5vw;
-    box-shadow: 0vw 0vw 0.3vw 0.3vw rgba(255, 255, 255, 0.5);
-    scale: 1.01;
-    border-color: rgb(0, 0, 0);
 }
+
 @media screen and (max-width: 1000px) {
-    .expanded {
-        width: 12vh;
+
+    .avatar_cover,
+    .avatar_img {
+        width: 4vh;
+        height: 4vh;
         border-radius: 7.5vh;
-        box-shadow: 0vh 0vh 0.3vh 0.3vh rgba(255, 255, 255, 0.5);
     }
-    
 }
 
 .avatar_cover {
-    width: 100%;
-    height: 100%;
-    border-radius: 3.5vw;
+    height: max-content;
+    position: relative;
     background-color: rgba(255, 255, 255, 0.323);
     transition: transform 1s;
-    position: absolute;
+    transition: width 1s, border-radius 1s, box-shadow 1s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
+
+.avatar_img {
+    background-image: url('../img/Avatar/avatar_1.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+    transition: transform 1s;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+}
+
+.avatar_img:hover {
+    transform: scale(1.1);
+    transition: transform 1s ease-in-out;
+}
+
+
+.expanded {
+    width: 12vw;
+    box-shadow: 0vw 0vw 0.3vw 0.3vw rgba(255, 255, 255, 0.5);
+    scale: 0.98;
+}
+
 @media screen and (max-width: 1000px) {
-    .avatar_cover {
-        border-radius: 3vh;
+    .expanded {
+        width: 12vh;
+        box-shadow: 0vh 0vh 0.3vh 0.3vh rgba(255, 255, 255, 0.5);
     }
-    
+
 }
 
 /* 模态窗口的基本样式 */
-.modal-background {
+.loaderAfter_modal-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -68,7 +91,7 @@
     z-index: 1000;
 }
 
-.modal-content {
+.loaderAfter_modal-content {
     width: 30vw;
     height: 10vw;
     background-color: rgba(255, 255, 255, 0.696);
@@ -82,29 +105,29 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .modal-content {
+    .loaderAfter_modal-content {
         width: 30vh;
         height: 10vh;
         border-radius: 0.5vh;
         padding: 2vh;
         box-shadow: 0 0 0.4vh 0.6vh rgb(255, 255, 255);
     }
-    
+
 }
 
-.modal-content p {
+.loaderAfter_modal-content p {
     margin: 0;
     font-size: 1.5vw;
     font-weight: 600;
 }
 
 @media screen and (max-width: 1000px) {
-    .modal-content p {
+    .loaderAfter_modal-content p {
         font-size: 1.5vh;
     }
 }
 
-.modal-content button {
+.loaderAfter_modal-content button {
     margin: 2vw;
     width: max-content;
     padding: 0.5vw 1vw;
@@ -118,7 +141,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .modal-content button {
+    .loaderAfter_modal-content button {
         margin: 2vh;
         font-size: 0.8vh;
         padding: 0.5vh 1vh;
@@ -126,7 +149,7 @@
     }
 }
 
-.modal-content button:hover {
+.loaderAfter_modal-content button:hover {
     background-color: rgba(255, 255, 255, 0);
     transform: scale(1.1);
     color: black;
@@ -136,9 +159,8 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .modal-content button:hover {
+    .loaderAfter_modal-content button:hover {
         font-size: 0.9vh;
         box-shadow: 0 0 0.2vh 0.2vh rgba(0, 0, 0, 0.5);
     }
-    
 }
