@@ -2,6 +2,20 @@ import * as helpers from './helpers.js';
 import * as svgs from './svgs.js';
 
 /*
+生成网页icon
+=======================Export===========================
+generateFavicon(): 生成网页icon,调用randomImgGenerator
+*/
+function generateFavicon(url) {
+  const iconHerf = helpers.generateRandomImg(1, 12, 1, 2, url, 'png');
+  const favicon = document.querySelector('link[rel="icon"]');
+  favicon.type = 'image/png';
+  if (favicon === null) return;
+  favicon.href = iconHerf;
+}
+
+
+/*
 生成加载动画
 =======================Export===========================
 numRainDrops: 雨滴数量
@@ -132,9 +146,8 @@ function greeting_model(greeting, accordingToTime, showingTime, flag = 'loaderAf
     location.reload();
   });
   const BackgroundButton = helpers.createButton('切换背景', function () {
-    randomImgGenerator(1, 12);
+    randomImgGenerator(1, 13, 1, 2, 'body', './img/Background/background', 'jpg');
   });
-
   ButtonContainer.appendChild(BackgroundButton);
   ButtonContainer.appendChild(reloadButton);
   modalContent.appendChild(greetingP);
@@ -161,7 +174,7 @@ function avatarExpand(selector, selector_cover = null, greeting = null, accordin
       this.classList.add('expanded');
       // coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(255,255,255,0)', flagOfInnerFunction = false, executeFunction = null)
       helpers.coverOnElement('.avatar_img', '50%', 'rgba(255,255,255,0.1)', true, function (e) {
-        randomImgGenerator(1, 12, 1, 1, '.avatar_img', './img/Avatar/avatar');
+        randomImgGenerator(1, 7, 1, 2, '.avatar_img', './img/Avatar/avatar', 'jpg');
         e.stopPropagation();
       });
     } else {
@@ -213,20 +226,22 @@ function avatarExpand(selector, selector_cover = null, greeting = null, accordin
 min: 图片最小编号
 max: 图片最大编号
 minformat - maxformagt: 图片格式总类（1为png, 2为jpg, 3为webp, 4为jpeg, 5为svg)
+fotmat: 图片格式
 category: 可能的值有 标签，class, id, 以及其他的选择器
 =======================Export===========================
 randomImgGenerator,配置已经生成好的检验过关的url, min和max 将会被generateRandomImg使用
 */
-async function randomImgGenerator(min, max, minformat = 1, maxformat = 2, category = 'body', imgUrl = './img/Background/background') {
-  let body = document.querySelector(category);
+async function randomImgGenerator(min, max, minformat = 1, maxformat = 2, category = 'body', imgUrl = './img/Background/background', format = null) {
+  let selector = document.querySelector(category);
   let exitPic = false;
   let randomImg;
   do {
-    randomImg = helpers.generateRandomImg(min, max, minformat, maxformat, imgUrl);
+    randomImg = helpers.generateRandomImg(min, max, minformat, maxformat, imgUrl, format);
     exitPic = await helpers.checkImage(randomImg);
   } while (!exitPic);
-  body.style.backgroundImage = `url(${randomImg})`;
+  selector.style.backgroundImage = `url(${randomImg})`;
 }
+
 
 
 /*
@@ -327,6 +342,8 @@ function createTimeCard(selector) {
 
 
 export {
+  /*favicon*/
+  generateFavicon,
   /*loader*/
   initializeLoader,
   checkResourcesLoaded,

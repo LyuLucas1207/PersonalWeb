@@ -3,18 +3,23 @@
 minformat: 图片格式最小编号
 maxformat: 图片格式最大编号
 url: 图片分类文件夹路径
+format: 图片格式
 generateRandomImg(): 生成随机图片url
 */
-function generateRandomImg(min, max, minformat, maxformat, url = './img/Background/background') {
+function generateRandomImg(min, max, minformat = 1, maxformat = 2, url = './img/Background/background', format = null) {
   let randomformat = Math.floor(Math.random() * (maxformat - minformat + 1)) + minformat;
   let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
-  if (randomformat === 1) {
-    return `${url}` + `_` + `${randomNum}.jpg`;
-  } else if (randomformat === 2) {
-    return `${url}` + `_` + `${randomNum}.png`;
+  if (format === 'jpg' || format === 'png' || format === 'jpeg' || format === 'webp' || format === 'gif' || format === 'svg' || format === 'bmp' || format === 'ico' ){
+    return `${url}` + `_` + `${randomNum}.${format}`;
   } else {
-    return `${url}` + `_` + `${1}.jpg`;
+    if (randomformat === 1) {
+      return `${url}` + `_` + `${randomNum}.jpg`;
+    } else if (randomformat === 2) {
+      return `${url}` + `_` + `${randomNum}.png`;
+    } else {
+      return `${url}` + `_` + `${1}.jpg`;
+    }
   }
 }
 /*
