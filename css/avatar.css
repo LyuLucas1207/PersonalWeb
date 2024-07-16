@@ -12,12 +12,10 @@
 
 @media screen and (max-width: 1000px) {
     .avatar {
-        top: 2vh;
-        left: 2vh;
+        top: 3vh;
+        left: 3vh;
     }
 }
-
-
 
 .avatar_cover,
 .avatar_img {
@@ -30,8 +28,8 @@
 
     .avatar_cover,
     .avatar_img {
-        width: 4vh;
-        height: 4vh;
+        width: 5vh;
+        height: 5vh;
         border-radius: 7.5vh;
     }
 }
@@ -58,24 +56,83 @@
 }
 
 .avatar_img:hover {
-    transform: scale(1.1);
+    transform: scale(1.01);
     transition: transform 1s ease-in-out;
 }
 
+.avatar_name {
+    position: absolute;
+    width: 1vw;
+    height: 4vw;
+    left: 1vw;
+    font-size: 1.5vw;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0);
+    border-radius: 8vw;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 1vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .avatar_name {
+        width: 1vh;
+        height: 5vh;
+        left: 1vh;
+        font-size: 1.5vh;
+        border-radius: 8vh;
+        padding-right: 1vh;
+    }
+    
+}
+
+.avatar_img:hover ~ .avatar_name {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0vw 0vw 0.3vw 0.3vw rgba(255, 255, 255, 0.5);
+    width: 14vw;
+    font-size: 1.6vw;
+    transition: all 1s;
+    animation: colorChange 1s forwards;
+}
+
+@media screen and (max-width: 1000px) {
+    .avatar_img:hover ~ .avatar_name {
+        width: 14vh;
+        font-size: 1.6vh;
+        box-shadow: 0vh 0vh 0.3vh 0.3vh rgba(255, 255, 255, 0.5);
+    }
+    
+}
+
+@keyframes colorChange {
+    0% {
+        color: rgba(255, 255, 255, 0);
+    }
+
+    75% {
+        color: rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        color: rgb(255, 255, 255);
+    }
+    
+}
 
 .expanded {
-    width: 12vw;
+    width: 16vw;
     box-shadow: 0vw 0vw 0.3vw 0.3vw rgba(255, 255, 255, 0.5);
     scale: 0.98;
 }
 
 @media screen and (max-width: 1000px) {
     .expanded {
-        width: 12vh;
+        width: 16vh;
         box-shadow: 0vh 0vh 0.3vh 0.3vh rgba(255, 255, 255, 0.5);
     }
-
 }
+
 
 /* 模态窗口的基本样式 */
 .loaderAfter_modal-background {
