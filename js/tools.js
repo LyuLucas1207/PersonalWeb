@@ -138,7 +138,7 @@ avatarExpand: 头像展开
 function greeting_model(greeting, accordingToTime, showingTime, flag = 'loaderAfter') {
   if (greeting === null) return;
   const { modalBackground, modalContent } = helpers.createModalBackground(flag);
-  greeting = helpers.getGreeting(greeting, accordingToTime);
+  greeting = helpers.getGreeting(greeting, accordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
   const greetingP = document.createElement('p');
   greetingP.textContent = greeting;
   const ButtonContainer = helpers.elementWithClass('div', 'button_container');

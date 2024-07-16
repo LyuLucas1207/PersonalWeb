@@ -129,14 +129,14 @@ greeting: 问候语
 accordingToTime: 是否根据时间生成问候语
 getGreeting(): 返回问候语
 */
-function getGreeting(greeting, accordingToTime = true) {
+function getGreeting(greeting, accordingToTime = true, morning = '早上好', afternoon = '下午好', evening = '晚上好', night = '深夜好') {
   if (accordingToTime) {
     const currentTime = new Date();
     const hour = currentTime.getHours();
-    if (hour < 6) return '深夜好，' + greeting;
-    if (hour < 12) return '早上好，' + greeting;
-    if (hour < 18) return '下午好，' + greeting;
-    return '晚上好，' + greeting;
+    if (hour < 6)  return night + greeting;
+    if (hour < 12) return morning + greeting; 
+    if (hour < 18) return afternoon + greeting;
+    return evening + greeting;
   }
   return greeting;
 }
