@@ -1,3 +1,4 @@
+
 /*
 生成随机图片
 minformat: 图片格式最小编号
@@ -7,20 +8,20 @@ format: 图片格式
 generateRandomImg(): 生成随机图片url
 */
 function generateRandomImg(min, max, minformat = 1, maxformat = 2, url = './img/Background/background', format = null) {
-  let randomformat = Math.floor(Math.random() * (maxformat - minformat + 1)) + minformat;
-  let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+    let randomformat = Math.floor(Math.random() * (maxformat - minformat + 1)) + minformat;
+    let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
-  if (format === 'jpg' || format === 'png' || format === 'jpeg' || format === 'webp' || format === 'gif' || format === 'svg' || format === 'bmp' || format === 'ico' ){
-    return `${url}` + `_` + `${randomNum}.${format}`;
-  } else {
-    if (randomformat === 1) {
-      return `${url}` + `_` + `${randomNum}.jpg`;
-    } else if (randomformat === 2) {
-      return `${url}` + `_` + `${randomNum}.png`;
+    if (format === 'jpg' || format === 'png' || format === 'jpeg' || format === 'webp' || format === 'gif' || format === 'svg' || format === 'bmp' || format === 'ico') {
+        return `${url}` + `_` + `${randomNum}.${format}`;
     } else {
-      return `${url}` + `_` + `${1}.jpg`;
+        if (randomformat === 1) {
+            return `${url}` + `_` + `${randomNum}.jpg`;
+        } else if (randomformat === 2) {
+            return `${url}` + `_` + `${randomNum}.png`;
+        } else {
+            return `${url}` + `_` + `${1}.jpg`;
+        }
     }
-  }
 }
 /*
   检查图片是否加载成功
@@ -28,16 +29,16 @@ function generateRandomImg(min, max, minformat = 1, maxformat = 2, url = './img/
   checkImage(): 返回一个promise对象，resolve为true表示图片加载成功，resolve为false表示图片加载失败
 */
 function checkImage(src) {
-  return new Promise((resolve) => {
-    let img = new Image();
-    img.onload = function () {
-      resolve(true);
-    };
-    img.onerror = function () {
-      resolve(false);
-    };
-    img.src = src;
-  });
+    return new Promise((resolve) => {
+        let img = new Image();
+        img.onload = function () {
+            resolve(true);
+        };
+        img.onerror = function () {
+            resolve(false);
+        };
+        img.src = src;
+    });
 }
 /*
 生成随机位置
@@ -47,20 +48,20 @@ range: 位置范围,例如range=100,则值在-50到50之间
 generateRandomPosition(): 返回一个包含num个随机位置的数组，每个位置包含left,top,right,bottom四个属性
 */
 function generateRandomPosition(num, unit, range) {
-  let position = [];
-  for (let i = 0; i < num; i++) {
-    let left = Math.floor(Math.random() * range - range / 2);
-    let top = Math.floor(Math.random() * range - range / 2);
-    let right = Math.floor(Math.random() * range - range / 2);
-    let bottom = Math.floor(Math.random() * range - range / 2);
-    position.push({
-      left: `${left}${unit}`,
-      top: `${top}${unit}`,
-      right: `${right}${unit}`,
-      bottom: `${bottom}${unit}`
-    });
-  }
-  return position;
+    let position = [];
+    for (let i = 0; i < num; i++) {
+        let left = Math.floor(Math.random() * range - range / 2);
+        let top = Math.floor(Math.random() * range - range / 2);
+        let right = Math.floor(Math.random() * range - range / 2);
+        let bottom = Math.floor(Math.random() * range - range / 2);
+        position.push({
+            left: `${left}${unit}`,
+            top: `${top}${unit}`,
+            right: `${right}${unit}`,
+            bottom: `${bottom}${unit}`
+        });
+    }
+    return position;
 }
 
 /* 
@@ -74,10 +75,10 @@ location.reload();
 });
 */
 function createButton(text, onClickHandler) {
-  const button = document.createElement('button');
-  button.textContent = text;
-  button.addEventListener('click', onClickHandler);
-  return button;
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', onClickHandler);
+    return button;
 }
 
 /*
@@ -88,9 +89,9 @@ elementWithClass(): 返回一个指定类型和类名的元素
 Example: const cloud = elementWithClass('div', 'cloud');
 */
 function elementWithClass(elementType, className) {
-  const element = document.createElement(elementType);
-  element.classList.add(className);
-  return element;
+    const element = document.createElement(elementType);
+    element.classList.add(className);
+    return element;
 }
 
 
@@ -101,11 +102,11 @@ modalContent: 模态内容元素
 closeModalOnClickOutside(): 点击模态背景以外的部分关闭模态窗口
 */
 function closeModalOnClickOutside(modalBackground, modalContent) {
-  modalBackground.addEventListener('click', function (e) {
-    if (!modalContent.contains(e.target)) {
-      document.body.removeChild(modalBackground);
-    }
-  });
+    modalBackground.addEventListener('click', function (e) {
+        if (!modalContent.contains(e.target)) {
+            document.body.removeChild(modalBackground);
+        }
+    });
 }
 
 
@@ -115,12 +116,12 @@ flag: 用于区分不同的模态窗口：${flag}_modal-background, ${flag}_moda
 createModalBackground(): 返回模态背景和内容元素
 */
 function createModalBackground(flag) {
-  const modalBackground = document.createElement('div');
-  modalBackground.className = `${flag}_modal-background`;
-  const modalContent = document.createElement('div');
-  modalContent.className = `${flag}_modal-content`;
-  modalBackground.appendChild(modalContent);
-  return { modalBackground, modalContent };
+    const modalBackground = document.createElement('div');
+    modalBackground.className = `${flag}_modal-background`;
+    const modalContent = document.createElement('div');
+    modalContent.className = `${flag}_modal-content`;
+    modalBackground.appendChild(modalContent);
+    return { modalBackground, modalContent };
 }
 
 /* 
@@ -130,15 +131,15 @@ accordingToTime: 是否根据时间生成问候语
 getGreeting(): 返回问候语
 */
 function getGreeting(greeting, accordingToTime = true, morning = '早上好', afternoon = '下午好', evening = '晚上好', night = '深夜好') {
-  if (accordingToTime) {
-    const currentTime = new Date();
-    const hour = currentTime.getHours();
-    if (hour < 6)  return night + greeting;
-    if (hour < 12) return morning + greeting; 
-    if (hour < 18) return afternoon + greeting;
-    return evening + greeting;
-  }
-  return greeting;
+    if (accordingToTime) {
+        const currentTime = new Date();
+        const hour = currentTime.getHours();
+        if (hour < 6) return night + greeting;
+        if (hour < 12) return morning + greeting;
+        if (hour < 18) return afternoon + greeting;
+        return evening + greeting;
+    }
+    return greeting;
 }
 
 /*
@@ -147,57 +148,57 @@ format24Hour: 是否使用24小时制,false表示使用12小时制,true表示使
 getCurrentTime(): 返回当前时间
 */
 function getCurrentTime(format24Hour) {
-  const now = new Date();
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  let ampm = '';
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    let ampm = '';
 
-  if (!format24Hour) {
-    ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    /*重写getCurrentTime*/
-    getCurrentTime = function (format24Hour) {
-      const now = new Date();
-      let hours = now.getHours();
-      let minutes = now.getMinutes();
-      let seconds = now.getSeconds();
-      let ampm = '';
+    if (!format24Hour) {
+        ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        /*重写getCurrentTime*/
+        getCurrentTime = function (format24Hour) {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = '';
 
-      ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
+            ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
 
-      hours = hours < 10 ? '0' + hours : hours;
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      seconds = seconds < 10 ? '0' + seconds : seconds;
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
 
-      const timeString = `${hours}:${minutes}:${seconds}`;
-      return { timeString, ampm };
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            return { timeString, ampm };
+        }
+    } else {
+        getCurrentTime = function (format24Hour) {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = '';
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            return { timeString, ampm };
+        }
     }
-  } else {
-    getCurrentTime = function (format24Hour) {
-      const now = new Date();
-      let hours = now.getHours();
-      let minutes = now.getMinutes();
-      let seconds = now.getSeconds();
-      let ampm = '';
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
 
-      hours = hours < 10 ? '0' + hours : hours;
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      seconds = seconds < 10 ? '0' + seconds : seconds;
-
-      const timeString = `${hours}:${minutes}:${seconds}`;
-      return { timeString, ampm };
-    }
-  }
-  hours = hours < 10 ? '0' + hours : hours;
-  minutes = minutes < 10 ? '0' + minutes : minutes;
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-
-  const timeString = `${hours}:${minutes}:${seconds}`;
-  return { timeString, ampm };
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    return { timeString, ampm };
 }
 
 /*
@@ -205,14 +206,14 @@ function getCurrentTime(format24Hour) {
 getCurrentDay(): 返回当前日期,s使用localeDateString()方法
 */
 function getCurrentDay() {
-  const now = new Date();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  /* weekday: long => Monday, short => Mon, narrow => M
-    * year: numeric => 2012, 2-digit => 12
-    * month: long => January, short => Jan, narrow => J
-    * day: numeric => 2-digit => 02
-    */
-  return now.toLocaleDateString('en-US', options);
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    /* weekday: long => Monday, short => Mon, narrow => M
+      * year: numeric => 2012, 2-digit => 12
+      * month: long => January, short => Jan, narrow => J
+      * day: numeric => 2-digit => 02
+      */
+    return now.toLocaleDateString('en-US', options);
 }
 
 /*
@@ -226,35 +227,35 @@ coverOnElement(): 绘制透明circle
 */
 
 function coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(255,255,255,0)', flagOfInnerFunction = false, executeFunction = null) {
-  const element = document.querySelector(selector);
-  const circle = elementWithClass('div', 'circle');
-  circle.style.width = `${element.offsetWidth}px`;
-  circle.style.height = `${element.offsetHeight}px`;
-  circle.style.position = 'absolute';
-  // circle.style.borderRadius = borderRadius;
-  if (borderRadius === null) {
-    circle.style.borderRadius = element.offsetHeight > element.offsetWidth ? `${element.offsetWidth / 2}px` : `${element.offsetHeight / 2}px`;
-  } else {
-    circle.style.borderRadius = borderRadius;
-  }
-  circle.style.backgroundColor = backgroundColor;
-  element.appendChild(circle);
-  if (flagOfInnerFunction) {
-    circle.addEventListener('click', executeFunction);
-  }
+    const element = document.querySelector(selector);
+    const circle = elementWithClass('div', 'circle');
+    circle.style.width = `${element.offsetWidth}px`;
+    circle.style.height = `${element.offsetHeight}px`;
+    circle.style.position = 'absolute';
+    // circle.style.borderRadius = borderRadius;
+    if (borderRadius === null) {
+        circle.style.borderRadius = element.offsetHeight > element.offsetWidth ? `${element.offsetWidth / 2}px` : `${element.offsetHeight / 2}px`;
+    } else {
+        circle.style.borderRadius = borderRadius;
+    }
+    circle.style.backgroundColor = backgroundColor;
+    element.appendChild(circle);
+    if (flagOfInnerFunction) {
+        circle.addEventListener('click', executeFunction);
+    }
 }
 
 
 export {
-  generateRandomImg,
-  generateRandomPosition,
-  checkImage,
-  createButton,
-  elementWithClass,
-  closeModalOnClickOutside,
-  createModalBackground,
-  getGreeting,
-  getCurrentTime,
-  getCurrentDay,
-  coverOnElement
+    generateRandomImg,
+    generateRandomPosition,
+    checkImage,
+    createButton,
+    elementWithClass,
+    closeModalOnClickOutside,
+    createModalBackground,
+    getGreeting,
+    getCurrentTime,
+    getCurrentDay,
+    coverOnElement
 };
