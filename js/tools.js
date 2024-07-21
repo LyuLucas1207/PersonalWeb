@@ -22,13 +22,13 @@ numRainDrops: 雨滴数量
 rangeRain_left: 雨滴左右范围
 numRainHits: 雨滴击中数量
 rangeHit_left: 雨滴击中左右范围
-initializeLoader: 初始化加载动画
-checkResourcesLoaded: 检查资源是否加载完成
+initializeLoader(): 初始化加载动画
+checkResourcesLoaded(): 检查资源是否加载完成
 seconds: 最小加载时间
-minLoadTime: 最小加载时间
+minLoadTime(): 最小加载时间
 loaderSelector: 加载动画选择器
 time: 动画时间
-showContent: 显示内容
+showContent(): 显示内容
 */
 
 function initializeLoader(numRainDrops = 20, rangeRain_left = 25, numRainHits = 20, rangeHit_left = 25) {
@@ -78,6 +78,8 @@ function initializeLoader(numRainDrops = 20, rangeRain_left = 25, numRainHits = 
     loader.appendChild(rain);
     loader.appendChild(surface);
 }
+
+
 async function checkResourcesLoaded() {
     return new Promise((resolve) => {
         window.addEventListener('load', () => {
@@ -129,11 +131,50 @@ function showContent(loaderSelector, time = 5) {
 }
 
 /*
+对选择器生成随机background-color
+selector: 选择器
+flag_same:统一设置相同颜色还是循环设置不同颜色 true为统一设置相同颜色，false为循环设置不同颜色
+false:如果颜色或者透明度有数值，则循环时某个值不会发生变化，
+        如果颜色或者透明度为null，则循环时某个值会发生变化
+true:如果颜色或者透明度有数值，则统一设置时某个值不会发生变化，
+        如果颜色或者透明度为null，则统一设置时某个值会发生变化
+flag_opacity: 统一设置相同透明度还是循环设置不同透明度 true为统一设置相同透明度，false为循环设置不同透明度
+color_r: 颜色r值
+color_g: 颜色g值
+color_b: 颜色b值
+opacity: 透明度
+min_color: 颜色最小值
+max_color: 颜色最大值
+min_opacity: 透明度最小值
+max_opacity: 透明度最大值
+generateRandomBackgroundColor(): 生成随机background-color
+*/
+function generateRandomBackgroundColor(selector, flag_same = true, flag_opacity = true ,color_r = null, color_g = null, color_b = null, opacity = null, min_color = 0, max_color = 255, min_opacity = 0, max_opacity = 1) {
+    let randomColor_r = color_r === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_r, color_r, false);
+    let randomColor_g = color_g === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_g, color_g, false);
+    let randomColor_b = color_b === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_b, color_b, false);
+    let randomOpacity = opacity === null ? helpers.generateRandom_T_Opacity_F_Color(min_opacity, max_opacity, true) : helpers.generateRandom_T_Opacity_F_Color(opacity, opacity, true);
+    document.querySelectorAll(selector).forEach((element) => {
+        if (!flag_opacity){ /*循环设置不同透明度*/
+            randomOpacity = helpers.generateRandom_T_Opacity_F_Color(min_opacity, max_opacity, true);
+        } 
+        if (!flag_same) {/*循环设置不同颜色*/
+            randomColor_r = color_r === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_r, color_r, false);
+            randomColor_g = color_g === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_g, color_g, false);
+            randomColor_b = color_b === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_b, color_b, false);
+        } 
+        element.style.backgroundColor = `rgba(${randomColor_r},${randomColor_g},${randomColor_b},${randomOpacity})`;
+    });
+}
+
+
+/*
+生成问候语
 selector: 选择器, 选择头像元素
 greeting: 问候语
-greeting_model: 问候语
+greeting_model(): 问候语
 =======================Export===========================
-avatarExpand: 头像展开
+avatarExpand(): 头像展开
 */
 function greeting_model(greeting, accordingToTime, showingTime, flag = 'loaderAfter') {
     if (greeting === null) return;
@@ -229,7 +270,7 @@ minformat - maxformagt: 图片格式总类（1为png, 2为jpg, 3为webp, 4为jpe
 fotmat: 图片格式
 category: 可能的值有 标签，class, id, 以及其他的选择器
 =======================Export===========================
-randomImgGenerator,配置已经生成好的检验过关的url, min和max 将会被generateRandomImg使用
+randomImgGenerator():配置已经生成好的检验过关的url, min和max 将会被generateRandomImg使用
 */
 async function randomImgGenerator(min, max, minformat = 1, maxformat = 2, category = 'body', imgUrl = './img/Background/background', format = null) {
     let selector = document.querySelector(category);
@@ -349,6 +390,8 @@ export {
     checkResourcesLoaded,
     showContent,
     minLoadTime,
+    /*background-color*/
+    generateRandomBackgroundColor,
     /*avatar*/
     avatarExpand,
     /*background*/

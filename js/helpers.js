@@ -1,3 +1,24 @@
+/*
+生成随机透明度或者随机颜色
+min: 透明度最小值
+max: 透明度最大值
+flag: 是否生成随机透明度，true表示生成随机透明度，false表示生成随机颜色
+    如果为true,则返回一个随机透明度，min和max从0到1之间
+    如果为false,则返回一个随机颜色，min和max从0到255之间
+generateRandom_T_Opacity_F_Color(): 返回一个随机透明度或者随机颜色
+*/
+
+function generateRandom_T_Opacity_F_Color(min, max, flag = false) {
+    if (flag) {
+        return Math.random() * (max - min) + min; /*最大范围从0到1之间，其中包括0但不包括1*/
+    } else {
+        return Math.floor(Math.random() * (max - min + 1)) + min; /*返回min到max之间的随机整数,最大范围从0到255之间，包括0和255*/
+    }
+}
+
+
+
+
 
 /*
 生成随机图片
@@ -247,6 +268,7 @@ function coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(2
 
 
 export {
+    generateRandom_T_Opacity_F_Color,
     generateRandomImg,
     generateRandomPosition,
     checkImage,

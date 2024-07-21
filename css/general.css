@@ -68,14 +68,13 @@ body::before {
     z-index: -1;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.178);
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
     filter: blur(5vw);
     -webkit-filter: blur(5vw);
-    opacity: 0.5;
     /*四周向内阴影白色发光*/
 }
 
@@ -176,7 +175,6 @@ body::before {
     position: relative;
     width: 20vw;
     height: 12vw;
-    background-color: #ffffff71;
     border-radius: 2vh;
     display: flex;
     justify-content: center;
@@ -202,7 +200,6 @@ body::before {
     } */
 
 }
-
 
 .center_inner_content_container:hover {
     transform: scale(0.98);
