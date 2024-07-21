@@ -288,44 +288,48 @@ async function randomImgGenerator(min, max, minformat = 1, maxformat = 2, catego
 /*
 随机生成地球周围星星
 num: 星星数量, 
-range: 星星范围
+range: 星星范围,
+selector: 选择器
 generateStar: 生成星星, 生成星星div, 生成星星div两个子div, 一个上半部分，一个下半部分，每个子div有两个圆角
 =======================Export===========================
 selector: 选择器, 选择星星生成的位置
 controlStar: 用于判断刷新页面时重新生成星星
 */
-function generateStar(num, range) {
-    let sectionBanner = document.querySelector('.section-banner');
-    let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
-    let position = helpers.generateRandomPosition(num, unit, range);
-    for (let i = 0; i < num; i++) {
-        let starDiv = document.createElement('div');
-        starDiv.id = `star-${i}`;
-        starDiv.style.position = 'absolute';
-        starDiv.style.left = position[i].left;// Fallback values
-        starDiv.style.top = position[i].top;
-        starDiv.style.left = `calc(50% + ${position[i].left})`;
-        starDiv.style.top = `calc(50% + ${position[i].top})`;
-        starDiv.style.animation = `twinkling ${Math.floor(Math.random() * 5 + 1)}s infinite`;
+function generateStar(num, range, selector){
+    document.querySelectorAll(selector).forEach((sectionBanner) => {
+        let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
+        let position = helpers.generateRandomPosition(num, unit, range);
+        for (let i = 0; i < num; i++) {
+            let starDiv = document.createElement('div');
+            starDiv.id = `star-${i}`;
+            starDiv.style.position = 'absolute';
+            starDiv.style.transform = `translate(-50%, -50%)`;
+            starDiv.style.left = position[i].left;// Fallback values
+            starDiv.style.top = position[i].top;
+            starDiv.style.left = `calc(50% + ${position[i].left})`;
+            starDiv.style.top = `calc(50% + ${position[i].top})`;
+            starDiv.style.animation = `twinkling ${Math.floor(Math.random() * 5 + 1)}s infinite`;
 
-        let star_up = helpers.elementWithClass('div', 'curved-corner-star');
-        let star_down = helpers.elementWithClass('div', 'curved-corner-star');
-        let star_up_right = helpers.elementWithClass('div', 'curved-corner-topright');
-        let star_up_left = helpers.elementWithClass('div', 'curved-corner-topleft');
-        let star_down_right = helpers.elementWithClass('div', 'curved-corner-bottomright');
-        let star_down_left = helpers.elementWithClass('div', 'curved-corner-bottomleft');
+            let star_up = helpers.elementWithClass('div', 'curved-corner-star');
+            let star_down = helpers.elementWithClass('div', 'curved-corner-star');
+            let star_up_right = helpers.elementWithClass('div', 'curved-corner-topright');
+            let star_up_left = helpers.elementWithClass('div', 'curved-corner-topleft');
+            let star_down_right = helpers.elementWithClass('div', 'curved-corner-bottomright');
+            let star_down_left = helpers.elementWithClass('div', 'curved-corner-bottomleft');
 
-        star_up.appendChild(star_up_right);
-        star_up.appendChild(star_up_left);
-        star_down.appendChild(star_down_right);
-        star_down.appendChild(star_down_left);
-        starDiv.appendChild(star_down);
-        starDiv.appendChild(star_up);
-        sectionBanner.appendChild(starDiv);
-    }
+            star_up.appendChild(star_up_right);
+            star_up.appendChild(star_up_left);
+            star_down.appendChild(star_down_right);
+            star_down.appendChild(star_down_left);
+            starDiv.appendChild(star_down);
+            starDiv.appendChild(star_up);
+            sectionBanner.appendChild(starDiv);
+        }
+    });
+    
 }
 function controlStar(num, range, selector) {
-    generateStar(num, range);
+    generateStar(num, range, selector);
     window.addEventListener('resize', function () {
         let sectionBanner = document.querySelector(selector);
         while (sectionBanner.firstChild) {
@@ -342,42 +346,38 @@ format24Hour: 是否使用24小时制, 如果是false, 将会使用12小时制
 createTimeCard: 创建时间卡片
 */
 
-function createTimeCard(selector) {
-    const timeCard = document.querySelector(selector);
-    if (!timeCard) return;
 
-    function updateClock() {
-        const format24Hour = Math.random() < 0.5; // 随机选择时间格式
+function createTimeCard(selector) {
+    function updateClock(timeCard) {
+        const format24Hour = Math.random() < 0.5; // Randomly choose 24-hour or 12-hour format
         const { timeString, ampm } = helpers.getCurrentTime(format24Hour);
         const dayText = helpers.getCurrentDay();
-        const isDayTime = new Date().getHours() >= 6 && new Date().getHours() < 18; // 判断是白天还是晚上
+        const isDayTime = new Date().getHours() >= 6 && new Date().getHours() < 18; // Determine if it's day or night
         const svgIcon = isDayTime ? svgs.generateSunSVG() : svgs.generateMoonSVG();
 
+        // Clear the existing content in the timeCard
+        timeCard.innerHTML = '';
+
+        // Create and append the time display
         const timeTextP = helpers.elementWithClass('p', 'time-text');
-        const timeSpan = document.createElement('span');
-        timeSpan.textContent = timeString;
-        timeTextP.appendChild(timeSpan);
+        timeTextP.textContent = timeString + (ampm ? ' ' + ampm : '');
+        timeCard.appendChild(timeTextP);
 
-        if (ampm) {
-            const ampmSpan = helpers.elementWithClass('span', 'time-sub-text');
-            ampmSpan.textContent = ampm;
-            timeTextP.appendChild(ampmSpan);
-        }
-
+        // Create and append the day display
         const dayTextP = helpers.elementWithClass('p', 'day-text');
         dayTextP.textContent = dayText;
-
-        while (timeCard.firstChild) {
-            timeCard.removeChild(timeCard.firstChild);
-        }
-
-        timeCard.appendChild(timeTextP);
         timeCard.appendChild(dayTextP);
+
+        // Append the appropriate SVG icon
         timeCard.appendChild(svgIcon);
     }
 
-    updateClock();
-    setInterval(updateClock, 1000);
+    // Find all elements matching the selector and setup clocks for each
+    document.querySelectorAll(selector).forEach(timeCard => {
+        if (!timeCard) return;
+        updateClock(timeCard); // Update clock immediately for initialization
+        setInterval(() => updateClock(timeCard), 1000); // Set to update every second
+    });
 }
 
 

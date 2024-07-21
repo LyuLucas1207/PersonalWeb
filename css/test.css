@@ -1,30 +1,28 @@
-        /* 基本样式 */
-        .content,
-        .nav {
-            transition: transform 0.3s ease-in-out;
-            /* 平滑过渡效果 */
-        }
-
-        /* 主要内容 */
-        .content {
-            width: 80%;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #ff0000;
-            z-index: 100;
-        }
-
-        /* 隐藏的导航栏 */
-        .nav {
-            width: 20%;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: -20%;
-            /* 初始时隐藏在视窗左侧 */
-            background-color: #333;
-            color: #fff;
-            z-index: 200;
-        }
+/* 基本样式 */
+.content,
+.nav {
+    transition: transform 0.3s ease-in-out;
+    /* 平滑过渡效果 */
+}
+/* 主要内容 */
+.content {
+    width: 80%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ff0000;
+    z-index: 100;
+}
+/* 隐藏的导航栏 */
+.nav {
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -20%;
+    /* 初始时隐藏在视窗左侧 */
+    background-color: #333;
+    color: #fff;
+    z-index: 200;
+}
