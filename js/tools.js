@@ -1,5 +1,6 @@
 import * as helpers from './helpers.js';
 import * as svgs from './svgs.js';
+import * as createOverloads from './lib-js/createOverload.js';
 
 /*
 生成网页icon
@@ -7,7 +8,7 @@ import * as svgs from './svgs.js';
 generateFavicon(): 生成网页icon,调用randomImgGenerator
 */
 function generateFavicon(url) {
-    const iconHerf = helpers.generateRandomImg(1, 12, 1, 2, url, 'png');
+    const iconHerf = helpers.getRandomImg(1, 12, 1, 2, url, 'png');
     const favicon = document.querySelector('link[rel="icon"]');
     favicon.type = 'image/png';
     if (favicon === null) return;
@@ -22,7 +23,7 @@ numRainDrops: 雨滴数量
 rangeRain_left: 雨滴左右范围
 numRainHits: 雨滴击中数量
 rangeHit_left: 雨滴击中左右范围
-initializeLoader(): 初始化加载动画
+generateRain(): 初始化加载动画
 checkResourcesLoaded(): 检查资源是否加载完成
 seconds: 最小加载时间
 minLoadTime(): 最小加载时间
@@ -31,54 +32,52 @@ time: 动画时间
 showContent(): 显示内容
 */
 
-function initializeLoader(numRainDrops = 20, rangeRain_left = 25, numRainHits = 20, rangeHit_left = 25) {
-    if (!document.querySelector('.loader')) return;
-    let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
-    let dropstyle_height = [];
-    let dropstyle_top = [];
-    let dropstyle_left = [];
-    let hitstyle_left = [];
-    let animationDuration_rain = [];
-    let animationDuration_hit = [];
-    for (let i = 0; i < numRainDrops; i++) {
-        dropstyle_height.push(Math.floor(Math.random() * 2 + 1) + unit);
-        dropstyle_top.push(Math.floor(Math.random() * 2) + unit);
-        dropstyle_left.push(Math.floor(Math.random() * rangeRain_left) + unit);
-        animationDuration_rain.push(Math.floor(-Math.random() * 5) + 's');/*from 0s to -5s, animation-delay*/
-    }
-    for (let i = 0; i < numRainHits; i++) {
-        hitstyle_left.push(Math.floor(Math.random() * rangeHit_left) + unit);
-        animationDuration_hit.push(Math.floor(-Math.random() * 1) + 's');
-    }
-    const loader = document.querySelector('.loader');
-    const cloud = helpers.elementWithClass('div', 'cloud');
-    const cloudLeft = helpers.elementWithClass('div', 'cloud_left');
-    const cloudRight = helpers.elementWithClass('div', 'cloud_right');
-    cloud.appendChild(cloudLeft);
-    cloud.appendChild(cloudRight);
-    const rain = helpers.elementWithClass('div', 'rain');
-    for (let i = 0; i < numRainDrops; i++) {
-        const drop = helpers.elementWithClass('div', 'drop');
-        drop.style.height = dropstyle_height[i];
-        drop.style.top = dropstyle_top[i];
-        drop.style.left = dropstyle_left[i];
-        drop.style.animationDelay = animationDuration_rain[i];
-        rain.appendChild(drop);
-    }
-    const surface = helpers.elementWithClass('div', 'surface');
-    for (let j = 0; j < numRainHits; j++) {
-        const hit = helpers.elementWithClass('div', 'hit');
-        hit.style.left = hitstyle_left[j];
-        hit.style.animationDuration = animationDuration_hit[j];
-        surface.appendChild(hit);
-    }
-
-
-    loader.appendChild(cloud);
-    loader.appendChild(rain);
-    loader.appendChild(surface);
+function generateRain(numRainDrops = 20, rangeRain_left = 25, numRainHits = 20, rangeHit_left = 25, loaderSelector = '.loader') {
+    if (!document.querySelector(loaderSelector)) return;
+    document.querySelectorAll(loaderSelector).forEach(loader => {
+        let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
+        let dropstyle_height = [];
+        let dropstyle_top = [];
+        let dropstyle_left = [];
+        let hitstyle_left = [];
+        let animationDuration_rain = [];
+        let animationDuration_hit = [];
+        for (let i = 0; i < numRainDrops; i++) {
+            dropstyle_height.push(Math.floor(Math.random() * 2 + 1) + unit);
+            dropstyle_top.push(Math.floor(Math.random() * 2) + unit);
+            dropstyle_left.push(Math.floor(Math.random() * rangeRain_left) + unit);
+            animationDuration_rain.push(Math.floor(-Math.random() * 5) + 's');/*from 0s to -5s, animation-delay*/
+        }
+        for (let i = 0; i < numRainHits; i++) {
+            hitstyle_left.push(Math.floor(Math.random() * rangeHit_left) + unit);
+            animationDuration_hit.push(Math.floor(-Math.random() * 1) + 's');
+        }
+        const cloud = helpers.elementWithClass('div', 'cloud');
+        const cloudLeft = helpers.elementWithClass('div', 'cloud_left');
+        const cloudRight = helpers.elementWithClass('div', 'cloud_right');
+        cloud.appendChild(cloudLeft);
+        cloud.appendChild(cloudRight);
+        const rain = helpers.elementWithClass('div', 'rain');
+        for (let i = 0; i < numRainDrops; i++) {
+            const drop = helpers.elementWithClass('div', 'drop');
+            drop.style.height = dropstyle_height[i];
+            drop.style.top = dropstyle_top[i];
+            drop.style.left = dropstyle_left[i];
+            drop.style.animationDelay = animationDuration_rain[i];
+            rain.appendChild(drop);
+        }
+        const surface = helpers.elementWithClass('div', 'surface');
+        for (let j = 0; j < numRainHits; j++) {
+            const hit = helpers.elementWithClass('div', 'hit');
+            hit.style.left = hitstyle_left[j];
+            hit.style.animationDuration = animationDuration_hit[j];
+            surface.appendChild(hit);
+        }
+        loader.appendChild(cloud);
+        loader.appendChild(rain);
+        loader.appendChild(surface);
+    });
 }
-
 
 async function checkResourcesLoaded() {
     return new Promise((resolve) => {
@@ -149,20 +148,20 @@ min_opacity: 透明度最小值
 max_opacity: 透明度最大值
 generateRandomBackgroundColor(): 生成随机background-color
 */
-function generateRandomBackgroundColor(selector, flag_same = true, flag_opacity = true ,color_r = null, color_g = null, color_b = null, opacity = null, min_color = 0, max_color = 255, min_opacity = 0, max_opacity = 1) {
-    let randomColor_r = color_r === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_r, color_r, false);
-    let randomColor_g = color_g === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_g, color_g, false);
-    let randomColor_b = color_b === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_b, color_b, false);
-    let randomOpacity = opacity === null ? helpers.generateRandom_T_Opacity_F_Color(min_opacity, max_opacity, true) : helpers.generateRandom_T_Opacity_F_Color(opacity, opacity, true);
+function generateRandomBackgroundColor(selector, flag_same = true, flag_opacity = true, color_r = null, color_g = null, color_b = null, opacity = null, min_color = 0, max_color = 255, min_opacity = 0, max_opacity = 1) {
+    let randomColor_r = color_r === null ? helpers.getRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.getRandom_T_Opacity_F_Color(color_r, color_r, false);
+    let randomColor_g = color_g === null ? helpers.getRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.getRandom_T_Opacity_F_Color(color_g, color_g, false);
+    let randomColor_b = color_b === null ? helpers.getRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.getRandom_T_Opacity_F_Color(color_b, color_b, false);
+    let randomOpacity = opacity === null ? helpers.getRandom_T_Opacity_F_Color(min_opacity, max_opacity, true) : helpers.getRandom_T_Opacity_F_Color(opacity, opacity, true);
     document.querySelectorAll(selector).forEach((element) => {
-        if (!flag_opacity){ /*循环设置不同透明度*/
-            randomOpacity = helpers.generateRandom_T_Opacity_F_Color(min_opacity, max_opacity, true);
-        } 
+        if (!flag_opacity) { /*循环设置不同透明度*/
+            randomOpacity = helpers.getRandom_T_Opacity_F_Color(min_opacity, max_opacity, true);
+        }
         if (!flag_same) {/*循环设置不同颜色*/
-            randomColor_r = color_r === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_r, color_r, false);
-            randomColor_g = color_g === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_g, color_g, false);
-            randomColor_b = color_b === null ? helpers.generateRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.generateRandom_T_Opacity_F_Color(color_b, color_b, false);
-        } 
+            randomColor_r = color_r === null ? helpers.getRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.getRandom_T_Opacity_F_Color(color_r, color_r, false);
+            randomColor_g = color_g === null ? helpers.getRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.getRandom_T_Opacity_F_Color(color_g, color_g, false);
+            randomColor_b = color_b === null ? helpers.getRandom_T_Opacity_F_Color(min_color, max_color, false) : helpers.getRandom_T_Opacity_F_Color(color_b, color_b, false);
+        }
         element.style.backgroundColor = `rgba(${randomColor_r},${randomColor_g},${randomColor_b},${randomOpacity})`;
     });
 }
@@ -202,7 +201,8 @@ function greeting_model(greeting, accordingToTime, showingTime, flag = 'loaderAf
         }
     }, showingTime * 1000);
 }
-function avatarExpand(selector, selector_cover = null, greeting = null, accordingToTime = false, showingTime = 3, name = 'Mortal.LZ') {
+
+function avatarExpand(selector, selector_cover = null, greeting = null, accordingToTime = false, showingTime = 3, name = 'Lucas') {
     const avatar = document.querySelector(selector);
     greeting_model(greeting, accordingToTime, showingTime, 'loaderAfter');
     if (selector_cover === null) {
@@ -270,14 +270,14 @@ minformat - maxformagt: 图片格式总类（1为png, 2为jpg, 3为webp, 4为jpe
 fotmat: 图片格式
 category: 可能的值有 标签，class, id, 以及其他的选择器
 =======================Export===========================
-randomImgGenerator():配置已经生成好的检验过关的url, min和max 将会被generateRandomImg使用
+randomImgGenerator():配置已经生成好的检验过关的url, min和max 将会被getRandomImg使用
 */
 async function randomImgGenerator(min, max, minformat = 1, maxformat = 2, category = 'body', imgUrl = './img/Background/background', format = null) {
     let selector = document.querySelector(category);
     let exitPic = false;
     let randomImg;
     do {
-        randomImg = helpers.generateRandomImg(min, max, minformat, maxformat, imgUrl, format);
+        randomImg = helpers.getRandomImg(min, max, minformat, maxformat, imgUrl, format);
         exitPic = await helpers.checkImage(randomImg);
     } while (!exitPic);
     selector.style.backgroundImage = `url(${randomImg})`;
@@ -290,15 +290,15 @@ async function randomImgGenerator(min, max, minformat = 1, maxformat = 2, catego
 num: 星星数量, 
 range: 星星范围,
 selector: 选择器
-generateStar: 生成星星, 生成星星div, 生成星星div两个子div, 一个上半部分，一个下半部分，每个子div有两个圆角
+createStar: 生成星星, 生成星星div, 生成星星div两个子div, 一个上半部分，一个下半部分，每个子div有两个圆角
 =======================Export===========================
 selector: 选择器, 选择星星生成的位置
-controlStar: 用于判断刷新页面时重新生成星星
+generateStar: 用于判断刷新页面时重新生成星星
 */
-function generateStar(num, range, selector){
+function createStar(num, range, selector) {
     document.querySelectorAll(selector).forEach((sectionBanner) => {
         let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
-        let position = helpers.generateRandomPosition(num, unit, range);
+        let position = helpers.getRandomPosition(num, unit, range);
         for (let i = 0; i < num; i++) {
             let starDiv = document.createElement('div');
             starDiv.id = `star-${i}`;
@@ -326,16 +326,16 @@ function generateStar(num, range, selector){
             sectionBanner.appendChild(starDiv);
         }
     });
-    
+
 }
-function controlStar(num, range, selector) {
-    generateStar(num, range, selector);
+function generateStar(num, range, selector) {
+    createStar(num, range, selector);
     window.addEventListener('resize', function () {
         let sectionBanner = document.querySelector(selector);
         while (sectionBanner.firstChild) {
             sectionBanner.removeChild(sectionBanner.firstChild);
         }
-        generateStar(num, range);
+        createStar(num, range);
     });
 }
 
@@ -343,17 +343,17 @@ function controlStar(num, range, selector) {
 创建时间卡片
 format24Hour: 是否使用24小时制, 如果是false, 将会使用12小时制
 =======================Export===========================
-createTimeCard: 创建时间卡片
+generateTimeCard: 创建时间卡片
 */
 
 
-function createTimeCard(selector) {
+function generateTimeCard(selector) {
     function updateClock(timeCard) {
         const format24Hour = Math.random() < 0.5; // Randomly choose 24-hour or 12-hour format
         const { timeString, ampm } = helpers.getCurrentTime(format24Hour);
         const dayText = helpers.getCurrentDay();
         const isDayTime = new Date().getHours() >= 6 && new Date().getHours() < 18; // Determine if it's day or night
-        const svgIcon = isDayTime ? svgs.generateSunSVG() : svgs.generateMoonSVG();
+        const svgIcon = isDayTime ? svgs.generateSVG('sun') : svgs.generateSVG('moon');
 
         // Clear the existing content in the timeCard
         timeCard.innerHTML = '';
@@ -371,7 +371,6 @@ function createTimeCard(selector) {
         // Append the appropriate SVG icon
         timeCard.appendChild(svgIcon);
     }
-
     // Find all elements matching the selector and setup clocks for each
     document.querySelectorAll(selector).forEach(timeCard => {
         if (!timeCard) return;
@@ -380,13 +379,11 @@ function createTimeCard(selector) {
     });
 }
 
-
-
 export {
     /*favicon*/
     generateFavicon,
     /*loader*/
-    initializeLoader,
+    generateRain,
     checkResourcesLoaded,
     showContent,
     minLoadTime,
@@ -397,7 +394,8 @@ export {
     /*background*/
     randomImgGenerator,
     /*star*/
-    controlStar,
+    generateStar,
     /*time card*/
-    createTimeCard
+    generateTimeCard,
+    /*generateElements*/
 };

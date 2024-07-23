@@ -28,7 +28,7 @@ searchUser('Tom'); // search user Tom
 searchUser('Tom', 18); // search user Tom with age 18
 */
 
-function createOverload() {
+function createOverloadBytype() {
     const parameterMap = new Map();
     function overload(...args) {
         // const types = args.map(arg => {
@@ -58,7 +58,44 @@ function createOverload() {
     return overload;
 }
 
-export default createOverload;
+
+/*直接根据输入的string名字来搜索或者调用函数
+例如
+如果输入是'sun'，则调用generateSunSVG函数
+如果输入是'moon'，则调用generateMoonSVG函数
+
+如何使用
+import { createOverloadByName } from './createOverload.js';
+const generateSVG = createOverloadByName();
+generateSVG.addMethod('sun', generateSunSVG);
+generateSVG.addMethod('moon', generateMoonSVG);
+generateSVG('sun'); // 返回generateSunSVG函数的返回值
+generateSVG('moon'); // 返回generateMoonSVG函数的返回值
+*/
+function createOverloadByName(){
+    const nameMap = new Map();
+    function overload(name){
+        const fn = nameMap.get(name);
+        if(fn){
+            return fn();
+        }
+        throw new Error('No matching function');
+    }
+    overload.addMethod = function(name, fn){
+        if(typeof fn !== 'function' || !fn){
+            throw new Error('The last parameter must be a function');
+        }
+        nameMap.set(name, fn);
+    }
+    return overload;
+}
+
+export {    
+    createOverloadBytype, 
+    createOverloadByName 
+        };
+
+
 
 
 

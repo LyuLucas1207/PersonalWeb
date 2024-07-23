@@ -1,3 +1,5 @@
+import * as createOverloads from './lib-js/createOverload.js';
+
 /*
 生成SVG图标，太阳
 generateSunSVG(): 返回一个SVG元素
@@ -53,7 +55,8 @@ function generateMoonSVG() {
     return svg;
 }
 
-export {
-    generateSunSVG,
-    generateMoonSVG
-};
+
+export const generateSVG = createOverloads.createOverloadByName();
+generateSVG.addMethod('sun', generateSunSVG);
+generateSVG.addMethod('moon', generateMoonSVG);
+

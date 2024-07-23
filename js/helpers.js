@@ -5,10 +5,10 @@ max: 透明度最大值
 flag: 是否生成随机透明度，true表示生成随机透明度，false表示生成随机颜色
     如果为true,则返回一个随机透明度，min和max从0到1之间
     如果为false,则返回一个随机颜色，min和max从0到255之间
-generateRandom_T_Opacity_F_Color(): 返回一个随机透明度或者随机颜色
+getRandom_T_Opacity_F_Color(): 返回一个随机透明度或者随机颜色
 */
 
-function generateRandom_T_Opacity_F_Color(min, max, flag = false) {
+function getRandom_T_Opacity_F_Color(min, max, flag = false) {
     if (flag) {
         return Math.random() * (max - min) + min; /*最大范围从0到1之间，其中包括0但不包括1*/
     } else {
@@ -26,9 +26,9 @@ minformat: 图片格式最小编号
 maxformat: 图片格式最大编号
 url: 图片分类文件夹路径
 format: 图片格式
-generateRandomImg(): 生成随机图片url
+getRandomImg(): 生成随机图片url
 */
-function generateRandomImg(min, max, minformat = 1, maxformat = 2, url = './img/Background/background', format = null) {
+function getRandomImg(min, max, minformat = 1, maxformat = 2, url = './img/Background/background', format = null) {
     let randomformat = Math.floor(Math.random() * (maxformat - minformat + 1)) + minformat;
     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -66,9 +66,9 @@ function checkImage(src) {
 num: 生成随机位置的个数
 unit: 位置单位
 range: 位置范围,例如range=100,则值在-50到50之间
-generateRandomPosition(): 返回一个包含num个随机位置的数组，每个位置包含left,top,right,bottom四个属性
+getRandomPosition(): 返回一个包含num个随机位置的数组，每个位置包含left,top,right,bottom四个属性
 */
-function generateRandomPosition(num, unit, range) {
+function getRandomPosition(num, unit, range) {
     let position = [];
     for (let i = 0; i < num; i++) {
         let left = Math.floor(Math.random() * range - range / 2);
@@ -268,9 +268,9 @@ function coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(2
 
 
 export {
-    generateRandom_T_Opacity_F_Color,
-    generateRandomImg,
-    generateRandomPosition,
+    getRandom_T_Opacity_F_Color,
+    getRandomImg,
+    getRandomPosition,
     checkImage,
     createButton,
     elementWithClass,
