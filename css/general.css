@@ -223,19 +223,19 @@ body::before {
         text-align: center;
     }
 
-    .center_inner_container:nth-child(6) {
+    .center_inner_container:nth-child(8) {
         grid-area: item6;
         justify-self: center;
         align-self: center;
         text-align: center;
     }
 
-    .center_inner_container:nth-child(6),
-    .center_inner_container:nth-child(6) .center_inner_lighting_container,
-    .center_inner_container:nth-child(6) .center_inner_content_container,
-    .center_inner_container:nth-child(6) .center_inner_content_container:hover,
-    .center_inner_container:nth-child(6) .center_inner_lighting_container:hover,
-    .center_inner_container:nth-child(6) .time_card {
+    .center_inner_container:nth-child(8),
+    .center_inner_container:nth-child(8) .center_inner_lighting_container,
+    .center_inner_container:nth-child(8) .center_inner_content_container,
+    .center_inner_container:nth-child(8) .center_inner_content_container:hover,
+    .center_inner_container:nth-child(8) .center_inner_lighting_container:hover,
+    .center_inner_container:nth-child(8) .time_card {
         width: 44vh;
     }
 
@@ -243,7 +243,7 @@ body::before {
         grid-area: item7;
     }
 
-    .center_inner_container:nth-child(8) {
+    .center_inner_container:nth-child(6) {
         grid-area: item8;
     }
 
