@@ -61,6 +61,29 @@ function checkImage(src) {
         img.src = src;
     });
 }
+
+/*
+随机生成图片
+min: 图片最小编号
+max: 图片最大编号
+minformat - maxformagt: 图片格式总类（1为png, 2为jpg, 3为webp, 4为jpeg, 5为svg)
+fotmat: 图片格式
+category: 可能的值有 标签，class, id, 以及其他的选择器
+=======================Export===========================
+getRandomImgUrl():配置已经生成好的检验过关的url, min和max 将会被getRandomImg使用
+*/
+async function getRandomImgUrl(min, max, minformat = 1, maxformat = 2, category = 'body', imgUrl = './img/Background/background', format = null) {
+    let selector = document.querySelector(category);
+    let exitPic = false;
+    let randomImg;
+    do {
+        randomImg = getRandomImg(min, max, minformat, maxformat, imgUrl, format);
+        console.log(randomImg);
+        exitPic = await checkImage(randomImg);
+    } while (!exitPic);
+    selector.style.backgroundImage = `url(${randomImg})`;
+}
+
 /*
 生成随机位置
 num: 生成随机位置的个数
@@ -270,6 +293,7 @@ function coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(2
 export {
     getRandom_T_Opacity_F_Color,
     getRandomImg,
+    getRandomImgUrl,
     getRandomPosition,
     checkImage,
     createButton,
