@@ -78,9 +78,10 @@
 @media screen and (max-width: 1000px) {
     .avatar_name {
         height: 7vh;
-        font-size: 1.5vh;
+        font-size: 2vh;
         border-radius: 8vh;
         padding-right: 1vh;
+        right: 2vh;
     }
 }
 

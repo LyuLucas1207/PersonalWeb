@@ -96,6 +96,13 @@ body::before {
     width: max-content;
     height: max-content;
     cursor: pointer;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .center_inner_lighting_container {
@@ -197,7 +204,6 @@ body::before {
             "item6 item6"
             "item7 item8"
             "item9 item9";
-
     }
 
     .center_inner_container:nth-child(1) {
@@ -236,7 +242,7 @@ body::before {
     .center_inner_container:nth-child(8) .center_inner_content_container:hover,
     .center_inner_container:nth-child(8) .center_inner_lighting_container:hover,
     .center_inner_container:nth-child(8) .time_card {
-        width: 44vh;
+        width: 43vh;
     }
 
     .center_inner_container:nth-child(7) {
@@ -259,6 +265,6 @@ body::before {
     .center_inner_container:nth-child(9) .center_inner_content_container,
     .center_inner_container:nth-child(9) .center_inner_content_container:hover,
     .center_inner_container:nth-child(9) .center_inner_lighting_container:hover {
-        width: 44vh;
+        width: 43vh;
     }
 }
