@@ -176,7 +176,7 @@ format24Hour: 是否使用24小时制, 如果是false, 将会使用12小时制
 =======================Export===========================
 generateTimeCard: 创建时间卡片
 */
-function generateTimeCard(selector) {
+function generateTimeCard(selector, fn = null) {
     function updateClock(timeCard) {
         const format24Hour = Math.random() < 0.5; // Randomly choose 24-hour or 12-hour format
         const { timeString, ampm } = helpers.getCurrentTime(format24Hour);
@@ -185,7 +185,7 @@ function generateTimeCard(selector) {
         const svgIcon = isDayTime ? svgs.generateSVG('sun') : svgs.generateSVG('moon');
 
         // Clear the existing content in the timeCard
-        timeCard.innerHTML = '';
+        timeCard.textContent = '';
 
         // Create and append the time display
         const timeTextP = creates.createElementWithClass('p', 'time-text');
@@ -204,8 +204,12 @@ function generateTimeCard(selector) {
     document.querySelectorAll(selector).forEach(timeCard => {
         if (!timeCard) return;
         updateClock(timeCard); // Update clock immediately for initialization
-        setInterval(() => updateClock(timeCard), 1000); // Set to update every second
+        setInterval(() => {
+            updateClock(timeCard);
+            if (fn) fn();
+        }, 1000); // Set to update every second
     });
+
 }
 
 /*
