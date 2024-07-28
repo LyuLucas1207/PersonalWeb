@@ -1,4 +1,4 @@
-import * as helpers from './helpers.js';
+
 
 async function checkResourcesLoaded() {
     return new Promise((resolve) => {
@@ -33,12 +33,15 @@ async function checkResourcesLoaded() {
         });
     });
 }
+
 function minLoadTime(seconds) {
     const ms = seconds * 1000;
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
 }
+
+
 function showContent(loaderSelector, time = 5) {
     let loader = document.querySelector(loaderSelector);
     // 时间是time秒
@@ -51,67 +54,23 @@ function showContent(loaderSelector, time = 5) {
 }
 
 /*
-生成问候语
-=======================Export===========================
-selector: 选择器
-selector_cover: 选择器的遮罩层
-name: 名字
-avatarExpand(): 头像展开
+  检查图片是否加载成功
+  src: 图片url
+  checkImage(): 返回一个promise对象，resolve为true表示图片加载成功，resolve为false表示图片加载失败
 */
-
-function avatarExpand(selector_cover = null, name = 'Lucas') {
-    helpers.getRandomImgUrl(1, 30, 1, 2, '.avatar_img', './img/Avatar/avatar', 'jpg');
-    const avatarCover = document.querySelector(selector_cover);
-    avatarCover.addEventListener('click', function (e) {
-        const avatarImg = avatarCover.querySelector('.avatar_img');
-        if (!this.classList.contains('expanded')) {
-            this.classList.add('expanded');
-            helpers.createCover('.avatar_img', '50%', 'rgba(255,255,255,0.1)', true, function (e) {
-                helpers.getRandomImgUrl(1, 30, 1, 2, '.avatar_img', './img/Avatar/avatar', 'jpg');
-                e.stopPropagation();
-            });
-        } else {
-            this.classList.remove('expanded');
-            const circle = avatarImg.querySelector('.circle');
-            if (circle) {
-                avatarImg.removeChild(circle);
-            }
-        }
-        e.stopPropagation(); // Stop the click from propagating to avatarCover
-    });
-
-    avatarCover.addEventListener('click', function (e) {
-        if (this.classList.contains('expanded')) {
-            const avatarName = helpers.createElementWithClass('div', 'avatar_name');
-            avatarName.textContent = name;
-            avatarName.style.animation = 'colorChange 1s forwards';
-            this.appendChild(avatarName);
-            helpers.createCover('.avatar_name', '0', 'rgba(255, 255, 255, 0)', false, null);
-        } else {
-            const avatarName = this.querySelector('.avatar_name');
-            if (avatarName) {
-                this.removeChild(avatarName);
-            }
-        }
-        e.stopPropagation(); // Stop the click from propagating to avatarCover
-    });
-
-
-    document.addEventListener('click', function (e) {
-        const avatarImg = avatarCover.querySelector('.avatar_img');
-        if (avatarCover.classList.contains('expanded') && !avatarCover.contains(e.target)) {
-            avatarCover.classList.remove('expanded');
-            const avatarName = avatarCover.querySelector('.avatar_name');
-            if (avatarName) {
-                avatarCover.removeChild(avatarName);
-            }
-            const circle = avatarImg.querySelector('.circle');
-            if (circle) {
-                avatarImg.removeChild(circle);
-            }
-        }
+function checkImage(src) {
+    return new Promise((resolve) => {
+        let img = new Image();
+        img.onload = function () {
+            resolve(true);
+        };
+        img.onerror = function () {
+            resolve(false);
+        };
+        img.src = src;
     });
 }
+
 
 
 
@@ -119,6 +78,5 @@ export {
     checkResourcesLoaded,
     showContent,
     minLoadTime,
-    /*avatar*/
-    avatarExpand,
+    checkImage
 };

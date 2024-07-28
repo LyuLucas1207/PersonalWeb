@@ -1,5 +1,7 @@
 import * as helpers from './helpers.js';
 import * as svgs from './svgs.js';
+import * as events from './events.js';
+import * as creates from './creates.js';
 import { singleton } from './lib-js/singleton.js';
 
 /*
@@ -50,23 +52,23 @@ function generateRain(loaderSelector = '.loader', numRainDrops = 20, rangeRain_l
             hitstyle_left.push(Math.floor(Math.random() * rangeHit_left) + unit);
             animationDuration_hit.push(Math.floor(-Math.random() * 1) + 's');
         }
-        const cloud = helpers.createElementWithClass('div', 'cloud');
-        const cloudLeft = helpers.createElementWithClass('div', 'cloud_left');
-        const cloudRight = helpers.createElementWithClass('div', 'cloud_right');
+        const cloud = creates.createElementWithClass('div', 'cloud');
+        const cloudLeft = creates.createElementWithClass('div', 'cloud_left');
+        const cloudRight = creates.createElementWithClass('div', 'cloud_right');
         cloud.appendChild(cloudLeft);
         cloud.appendChild(cloudRight);
-        const rain = helpers.createElementWithClass('div', 'rain');
+        const rain = creates.createElementWithClass('div', 'rain');
         for (let i = 0; i < numRainDrops; i++) {
-            const drop = helpers.createElementWithClass('div', 'drop');
+            const drop = creates.createElementWithClass('div', 'drop');
             drop.style.height = dropstyle_height[i];
             drop.style.top = dropstyle_top[i];
             drop.style.left = dropstyle_left[i];
             drop.style.animationDelay = animationDuration_rain[i];
             rain.appendChild(drop);
         }
-        const surface = helpers.createElementWithClass('div', 'surface');
+        const surface = creates.createElementWithClass('div', 'surface');
         for (let j = 0; j < numRainHits; j++) {
-            const hit = helpers.createElementWithClass('div', 'hit');
+            const hit = creates.createElementWithClass('div', 'hit');
             hit.style.left = hitstyle_left[j];
             hit.style.animationDuration = animationDuration_hit[j];
             surface.appendChild(hit);
@@ -139,12 +141,12 @@ function createStar(num, range, selector) {
             starDiv.style.top = `calc(50% + ${position[i].top})`;
             starDiv.style.animation = `twinkling ${Math.floor(Math.random() * 5 + 1)}s infinite`;
 
-            let star_up = helpers.createElementWithClass('div', 'curved-corner-star');
-            let star_down = helpers.createElementWithClass('div', 'curved-corner-star');
-            let star_up_right = helpers.createElementWithClass('div', 'curved-corner-topright');
-            let star_up_left = helpers.createElementWithClass('div', 'curved-corner-topleft');
-            let star_down_right = helpers.createElementWithClass('div', 'curved-corner-bottomright');
-            let star_down_left = helpers.createElementWithClass('div', 'curved-corner-bottomleft');
+            let star_up = creates.createElementWithClass('div', 'curved-corner-star');
+            let star_down = creates.createElementWithClass('div', 'curved-corner-star');
+            let star_up_right = creates.createElementWithClass('div', 'curved-corner-topright');
+            let star_up_left = creates.createElementWithClass('div', 'curved-corner-topleft');
+            let star_down_right = creates.createElementWithClass('div', 'curved-corner-bottomright');
+            let star_down_left = creates.createElementWithClass('div', 'curved-corner-bottomleft');
 
             star_up.appendChild(star_up_right);
             star_up.appendChild(star_up_left);
@@ -186,12 +188,12 @@ function generateTimeCard(selector) {
         timeCard.innerHTML = '';
 
         // Create and append the time display
-        const timeTextP = helpers.createElementWithClass('p', 'time-text');
+        const timeTextP = creates.createElementWithClass('p', 'time-text');
         timeTextP.textContent = timeString + (ampm ? ' ' + ampm : '');
         timeCard.appendChild(timeTextP);
 
         // Create and append the day display
-        const dayTextP = helpers.createElementWithClass('p', 'day-text');
+        const dayTextP = creates.createElementWithClass('p', 'day-text');
         dayTextP.textContent = dayText;
         timeCard.appendChild(dayTextP);
 
@@ -215,16 +217,15 @@ showingTime: 显示时间
 flag: 标志，用于生成模态框
 generateGreetingModel（）: 生成问候语模态框
 */
-function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTime, greeting = null) {
-    helpers.getRandomImgUrl(1, 13, 1, 2, 'body', './img/Background/background', 'jpg');
+function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTime, greeting = null, buttonName = [], ...buttonFunction) {
     if (greeting === null) return;
-    const { modalBackground, modalContent } = helpers.createModalBackground(flag);
+    const { modalBackground, modalContent } = creates.createModalBackground(flag);
     let greetingThing;
     if (typeof greeting === 'function') {
         greetingThing = greeting();// 如果greeting是一个函数，则调用函数
     } else if (typeof greeting === 'string') {
         if (accordingToTime) {
-            greetingThing  = helpers.getGreeting(greeting, accordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
+            greetingThing = helpers.getGreeting(greeting, accordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
         } else {
             greetingThing = greeting;
         }
@@ -234,20 +235,27 @@ function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTim
 
     const greetingP = document.createElement('p');
     greetingP.textContent = greetingThing;
-    const ButtonContainer = helpers.createElementWithClass('div', 'button_container');
-    const reloadButton = helpers.createButton('重新加载', function () {
-        location.reload();
-    });
-    const BackgroundButton = helpers.createButton('切换背景', function () {
-        helpers.getRandomImgUrl(1, 13, 1, 2, 'body', './img/Background/background', 'jpg');
-    });
-    ButtonContainer.appendChild(BackgroundButton);
-    ButtonContainer.appendChild(reloadButton);
+    const ButtonContainer = creates.createElementWithClass('div', 'button_container');
+
+    if (buttonName.length === 0) { // 如果没有按钮，则不生成按钮
+        document.body.appendChild(modalBackground);
+        modalContent.appendChild(greetingP);
+        document.body.appendChild(modalBackground);
+        return;
+    } else { // 如果有按钮，则生成对应数量名字的按钮以及应用对应...buttonFunction中的函数
+        for (let i = 0; i < buttonName.length; i++) {
+            const BackgroundButton = creates.createButton(buttonName[i], function () {
+                buttonFunction[i]();
+            });
+            ButtonContainer.appendChild(BackgroundButton);
+        }
+    }
+        
     modalContent.appendChild(greetingP);
     modalContent.appendChild(ButtonContainer);
     document.body.appendChild(modalBackground);
 
-    helpers.closeModalOnClickOutside(modalBackground, modalContent);
+    events.closeModalOnClickOutside(modalBackground, modalContent);
     setTimeout(() => {
         if (document.body.contains(modalBackground)) {
             document.body.removeChild(modalBackground);

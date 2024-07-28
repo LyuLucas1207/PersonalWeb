@@ -146,7 +146,7 @@
 
 .loaderAfter_modal-content {
     width: 30vw;
-    height: 10vw;
+    height: max-content;
     background-color: rgba(255, 255, 255, 0.696);
     padding: 2vw;
     border-radius: 0.5vw;
@@ -180,8 +180,19 @@
     }
 }
 
+.loaderAfter_modal-content .button_container{ 
+    /*物体居中 ，不使用flex*/
+    display: flex;
+    flex-wrap: wrap; /*超出换行*/
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    margin-top: 1vw;
+}
+
 .loaderAfter_modal-content button {
-    margin: 2vw;
+    margin:0.5vw 2vw;
     width: max-content;
     padding: 0.5vw 1vw;
     height: max-content;
@@ -195,7 +206,7 @@
 
 @media screen and (max-width: 1000px) {
     .loaderAfter_modal-content button {
-        margin: 2vh;
+        margin:0.5vh 2vh;
         font-size: 0.8vh;
         padding: 0.5vh 1vh;
         border-radius: 0.3vh;
