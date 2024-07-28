@@ -50,23 +50,23 @@ function generateRain(loaderSelector = '.loader', numRainDrops = 20, rangeRain_l
             hitstyle_left.push(Math.floor(Math.random() * rangeHit_left) + unit);
             animationDuration_hit.push(Math.floor(-Math.random() * 1) + 's');
         }
-        const cloud = helpers.elementWithClass('div', 'cloud');
-        const cloudLeft = helpers.elementWithClass('div', 'cloud_left');
-        const cloudRight = helpers.elementWithClass('div', 'cloud_right');
+        const cloud = helpers.createElementWithClass('div', 'cloud');
+        const cloudLeft = helpers.createElementWithClass('div', 'cloud_left');
+        const cloudRight = helpers.createElementWithClass('div', 'cloud_right');
         cloud.appendChild(cloudLeft);
         cloud.appendChild(cloudRight);
-        const rain = helpers.elementWithClass('div', 'rain');
+        const rain = helpers.createElementWithClass('div', 'rain');
         for (let i = 0; i < numRainDrops; i++) {
-            const drop = helpers.elementWithClass('div', 'drop');
+            const drop = helpers.createElementWithClass('div', 'drop');
             drop.style.height = dropstyle_height[i];
             drop.style.top = dropstyle_top[i];
             drop.style.left = dropstyle_left[i];
             drop.style.animationDelay = animationDuration_rain[i];
             rain.appendChild(drop);
         }
-        const surface = helpers.elementWithClass('div', 'surface');
+        const surface = helpers.createElementWithClass('div', 'surface');
         for (let j = 0; j < numRainHits; j++) {
-            const hit = helpers.elementWithClass('div', 'hit');
+            const hit = helpers.createElementWithClass('div', 'hit');
             hit.style.left = hitstyle_left[j];
             hit.style.animationDuration = animationDuration_hit[j];
             surface.appendChild(hit);
@@ -139,12 +139,12 @@ function createStar(num, range, selector) {
             starDiv.style.top = `calc(50% + ${position[i].top})`;
             starDiv.style.animation = `twinkling ${Math.floor(Math.random() * 5 + 1)}s infinite`;
 
-            let star_up = helpers.elementWithClass('div', 'curved-corner-star');
-            let star_down = helpers.elementWithClass('div', 'curved-corner-star');
-            let star_up_right = helpers.elementWithClass('div', 'curved-corner-topright');
-            let star_up_left = helpers.elementWithClass('div', 'curved-corner-topleft');
-            let star_down_right = helpers.elementWithClass('div', 'curved-corner-bottomright');
-            let star_down_left = helpers.elementWithClass('div', 'curved-corner-bottomleft');
+            let star_up = helpers.createElementWithClass('div', 'curved-corner-star');
+            let star_down = helpers.createElementWithClass('div', 'curved-corner-star');
+            let star_up_right = helpers.createElementWithClass('div', 'curved-corner-topright');
+            let star_up_left = helpers.createElementWithClass('div', 'curved-corner-topleft');
+            let star_down_right = helpers.createElementWithClass('div', 'curved-corner-bottomright');
+            let star_down_left = helpers.createElementWithClass('div', 'curved-corner-bottomleft');
 
             star_up.appendChild(star_up_right);
             star_up.appendChild(star_up_left);
@@ -186,12 +186,12 @@ function generateTimeCard(selector) {
         timeCard.innerHTML = '';
 
         // Create and append the time display
-        const timeTextP = helpers.elementWithClass('p', 'time-text');
+        const timeTextP = helpers.createElementWithClass('p', 'time-text');
         timeTextP.textContent = timeString + (ampm ? ' ' + ampm : '');
         timeCard.appendChild(timeTextP);
 
         // Create and append the day display
-        const dayTextP = helpers.elementWithClass('p', 'day-text');
+        const dayTextP = helpers.createElementWithClass('p', 'day-text');
         dayTextP.textContent = dayText;
         timeCard.appendChild(dayTextP);
 
@@ -234,7 +234,7 @@ function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTim
 
     const greetingP = document.createElement('p');
     greetingP.textContent = greetingThing;
-    const ButtonContainer = helpers.elementWithClass('div', 'button_container');
+    const ButtonContainer = helpers.createElementWithClass('div', 'button_container');
     const reloadButton = helpers.createButton('重新加载', function () {
         location.reload();
     });

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const fnList = parallels.wrappedFunctions(fn1, fn2, fn3, fn4, fn5, fn6);
     // Execute all function definitions once DOM is fully loaded，await will wait for all tasks to complete
     await parallels.addMicrotask(1, fnList);
-    tools.avatarExpand('.avatar', '.avatar_cover', "Lucas");
+    tools.avatarExpand('.avatar_cover', "Lucas");
     const minLoadTime = tools.minLoadTime(1); // Set minimum load time
     const resourcesLoaded = tools.checkResourcesLoaded();
     await Promise.all([minLoadTime, resourcesLoaded]); // Ensure all resources are loaded

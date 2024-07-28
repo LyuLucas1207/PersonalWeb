@@ -129,10 +129,10 @@ function createButton(text, onClickHandler) {
 创建一个指定类型和类名的元素
 elementType: 元素类型
 className: 元素类名
-elementWithClass(): 返回一个指定类型和类名的元素
-Example: const cloud = elementWithClass('div', 'cloud');
+createElementWithClass(): 返回一个指定类型和类名的元素
+Example: const cloud = createElementWithClass('div', 'cloud');
 */
-function elementWithClass(elementType, className) {
+function createElementWithClass(elementType, className) {
     const element = document.createElement(elementType);
     element.classList.add(className);
     return element;
@@ -264,12 +264,12 @@ borderRadius: circle的border-radius
 flagOfInnerFunction: 如果是true表示执行内部addEventListner中executeFunction的函数，如果是false表示执行不用addEventListner的函数
 executeFunction: 执行函数
 backgroundColor: circle的背景颜色
-coverOnElement(): 绘制透明circle
+createCover(): 绘制透明circle
 */
 
-function coverOnElement(selector, borderRadius = null, backgroundColor = 'rgba(255,255,255,0)', flagOfInnerFunction = false, executeFunction = null) {
+function createCover(selector, borderRadius = null, backgroundColor = 'rgba(255,255,255,0)', flagOfInnerFunction = false, executeFunction = null) {
     const element = document.querySelector(selector);
-    const circle = elementWithClass('div', 'circle');
+    const circle = createElementWithClass('div', 'circle');
     circle.style.width = `${element.offsetWidth}px`;
     circle.style.height = `${element.offsetHeight}px`;
     circle.style.position = 'absolute';
@@ -294,11 +294,11 @@ export {
     getRandomPosition,
     checkImage,
     createButton,
-    elementWithClass,
+    createElementWithClass,
     closeModalOnClickOutside,
     createModalBackground,
     getGreeting,
     getCurrentTime,
     getCurrentDay,
-    coverOnElement
+    createCover
 };

@@ -119,7 +119,7 @@
 
 @media screen and (max-width: 1000px) {
     .expanded {
-        width: 18vh;
+        width: 22vh;
         box-shadow: 0vh 0vh 0.3vh 0.3vh rgba(255, 255, 255, 0.5);
     }
 }

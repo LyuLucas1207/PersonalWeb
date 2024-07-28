@@ -1,5 +1,4 @@
 import * as helpers from './helpers.js';
-import Elements from './generates.js';
 
 async function checkResourcesLoaded() {
     return new Promise((resolve) => {
@@ -60,19 +59,14 @@ name: 名字
 avatarExpand(): 头像展开
 */
 
-function avatarExpand(selector, selector_cover = null, name = 'Lucas') {
+function avatarExpand(selector_cover = null, name = 'Lucas') {
     helpers.getRandomImgUrl(1, 30, 1, 2, '.avatar_img', './img/Avatar/avatar', 'jpg');
-    const avatar = document.querySelector(selector);
-    if (avatar === null) return;
-    if (selector_cover === null) {
-        selector_cover = selector + '_cover';
-    }
-    const avatarCover = avatar.querySelector(selector_cover);
+    const avatarCover = document.querySelector(selector_cover);
     avatarCover.addEventListener('click', function (e) {
         const avatarImg = avatarCover.querySelector('.avatar_img');
         if (!this.classList.contains('expanded')) {
             this.classList.add('expanded');
-            helpers.coverOnElement('.avatar_img', '50%', 'rgba(255,255,255,0.1)', true, function (e) {
+            helpers.createCover('.avatar_img', '50%', 'rgba(255,255,255,0.1)', true, function (e) {
                 helpers.getRandomImgUrl(1, 30, 1, 2, '.avatar_img', './img/Avatar/avatar', 'jpg');
                 e.stopPropagation();
             });
@@ -88,11 +82,11 @@ function avatarExpand(selector, selector_cover = null, name = 'Lucas') {
 
     avatarCover.addEventListener('click', function (e) {
         if (this.classList.contains('expanded')) {
-            const avatarName = helpers.elementWithClass('div', 'avatar_name');
+            const avatarName = helpers.createElementWithClass('div', 'avatar_name');
             avatarName.textContent = name;
             avatarName.style.animation = 'colorChange 1s forwards';
             this.appendChild(avatarName);
-            helpers.coverOnElement('.avatar_name', '0', 'rgba(255, 255, 255, 0)', false, null);
+            helpers.createCover('.avatar_name', '0', 'rgba(255, 255, 255, 0)', false, null);
         } else {
             const avatarName = this.querySelector('.avatar_name');
             if (avatarName) {
@@ -105,7 +99,7 @@ function avatarExpand(selector, selector_cover = null, name = 'Lucas') {
 
     document.addEventListener('click', function (e) {
         const avatarImg = avatarCover.querySelector('.avatar_img');
-        if (avatarCover.classList.contains('expanded') && !avatar.contains(e.target)) {
+        if (avatarCover.classList.contains('expanded') && !avatarCover.contains(e.target)) {
             avatarCover.classList.remove('expanded');
             const avatarName = avatarCover.querySelector('.avatar_name');
             if (avatarName) {
