@@ -24,18 +24,27 @@ function wrappedFunctions(...fns) {
 @params fns {Function[]} - 函数列表
 @return {Promise}
 */
-function addMicrotask(fns) {
-    return new Promise((resolve) => {
-        fns.forEach(fn => {
-            queueMicrotask(fn);
+function addMicrotask(select = 'queueMicrotask', fns) {
+    if (select === 'queueMicrotask'||select === 1) {//如果你需要函数几乎同时开始并快速连续执行，且不需要处理函数返回的异步结果，使用 queueMicrotask。
+        return new Promise((resolve) => {
+            fns.forEach(fn => {
+                queueMicrotask(fn);
+            });
+            queueMicrotask(resolve);
         });
-        queueMicrotask(resolve);
-    }); //如果你需要函数几乎同时开始并快速连续执行，且不需要处理函数返回的异步结果，使用 queueMicrotask。
-
-    // return Promise.all(fns.map(fn => fn())); //如果你需要并行执行多个异步函数，并处理它们的完成或失败状态，使用 Promise.all。
-    // return fns.reduce((promise, fn) => promise.then(() => fn()), Promise.resolve());//如果函数执行有严格的顺序要求，需要前一个完成后才能开始下一个，使用 Promise 链方法。
+    } else if (select === 'Promise.all'|| select === 2) { //如果你需要并行执行多个异步函数，并处理它们的完成或失败状态，使用 Promise.all。
+        return Promise.all(fns.map(fn => fn()));
+    } else if (select === 'Promise.resolve'|| select === 3) { //如果函数执行有严格的顺序要求，需要前一个完成后才能开始下一个，使用 Promise 链方法。
+        return fns.reduce((promise, fn) => promise.then(() => fn()), Promise.resolve());
+    } else {
+        return new Promise((resolve) => {
+            fns.forEach(fn => {
+                queueMicrotask(fn);
+            });
+            queueMicrotask(resolve);
+        });
+    }
 }
-
 
 /*
 实现并发执行任务的功能
