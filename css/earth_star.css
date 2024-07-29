@@ -1,4 +1,3 @@
-
 .section-banner,
 .earth {
     height: 10vw;
@@ -6,14 +5,13 @@
     position: absolute;
 }
 
-
 .earth {
     transition: left 0.3s linear;
     background: url(../img/CardImg/earth.jpg);
     background-size: cover;
     animation: earthRotate 30s linear 0s infinite;
     border-radius: 50%;
-    box-shadow: 
+    box-shadow:
         0vh 0vh 2vh rgba(255, 255, 255, 0.2), -0.5vh 0vh 0.8vh rgba(255, 255, 255, 0.788) inset,
         1.5vh 0.2vh 2.5vh rgb(0, 0, 0) inset, -2.4vh -0.2vh 3.4vh rgba(255, 255, 255, 0.758) inset,
         10vh 0vh 4.4vh rgba(0, 0, 0, 0.628) inset, 15vh 0vh 3.8vh rgba(175, 168, 168, 0.025) inset;
@@ -29,7 +27,7 @@
     }
 
     .earth {
-        box-shadow: 
+        box-shadow:
             0vw 0vw 2vw rgba(255, 255, 255, 0.2), -0.5vw 0vw 0.8vw rgba(255, 255, 255, 0.788) inset,
             1.5vw 0.2vw 2.5vw rgb(0, 0, 0) inset, -2.4vw -0.2vw 3.4vw rgba(255, 255, 255, 0.758) inset,
             10vw 0vw 4.4vw rgba(0, 0, 0, 0.628) inset, 15vw 0vw 3.8vw rgba(175, 168, 168, 0.025) inset;
@@ -73,8 +71,6 @@
             1.5vw 0.2vw 2.5vw rgb(0, 0, 0), -2.4vw -0.2vw 3.4vw rgba(255, 255, 255, 0.553),
             25vw 0vw 4.4vw rgba(0, 0, 0, 0.628), 15vw 0vw 3.8vw rgba(175, 168, 168, 0.025);
     }
-
-
 }
 
 
@@ -142,4 +138,45 @@
     50% {
         opacity: 1;
     }
+}
+
+.ring {
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    transform: rotateX(20deg) rotateY(-15deg);
+    position: absolute;
+    display: block;
+    border: 0.2vw solid rgba(28, 3, 48, 0.987);
+    filter: drop-shadow(0 0 10vw white);
+    -webkit-animation: ring-rotating 120s infinite alternate;
+    animation: ring-rotating 12s infinite alternate;
+    mix-blend-mode: luminosity;
+}
+
+@media screen and (max-width: 1000px) {
+    .ring {
+        width: 15vh;
+        height: 15vh;
+        border: 0.2vh solid rgba(28, 3, 48, 0.987);
+        filter: drop-shadow(0 0 10vh white);
+    }
+}
+
+
+
+@keyframes ring-rotating {
+    0% {
+        transform: rotateX(321deg) rotateY(-147deg);
+    }
+
+    10% {
+        transform: rotateX(192deg) rotateY(55deg);
+    }
+
+    20% {
+        transform: rotateX(214deg) rotateY(267deg);
+    }
+
+
 }

@@ -8,9 +8,9 @@ import Elements from './generates.js';
 // Generate various elements and functionalities
 const fn1 = () => Elements.generateElements('rain', '.loader', 20, 30, 20, 30);
 const fn2 = () => Elements.generateElements('favicon', './img/Icon/icon', 'image/png');
-const fn3 = () => Elements.generateElements('star', '.section-banner', 25, 100);
+const fn3 = () => Elements.generateElements('star', '.section-banner', 125, 100);
 const fn4 = () => Elements.generateElements('timeCard', '.time_card', () => {
-    helpers.getRandomImgUrl(1, 13, 1, 2, 'body', './img/Background/background', 'jpg');
+    
 });
 const fn5 = () => Elements.generateElements('backgroundColor', '.center_inner_content_container', true, false, 255, 255, 255, null, null, null, 0.1, 0.6);
 const fn6 = () => Elements.generateElements('greeting', 'loaderAfter', true, 30,

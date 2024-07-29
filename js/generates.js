@@ -3,6 +3,7 @@ import * as svgs from './svgs.js';
 import * as events from './events.js';
 import * as creates from './creates.js';
 import { singleton } from './lib-js/singleton.js';
+import { debounce } from './lib-js/debounce.js';
 
 /*
 生成网页icon
@@ -156,18 +157,19 @@ function createStar(num, range, selector) {
             starDiv.appendChild(star_up);
             sectionBanner.appendChild(starDiv);
         }
+        console.log("generated");
     });
 
 }
 function generateStar(selector, num, range) {
     createStar(num, range, selector);
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', debounce(function () {
         let sectionBanner = document.querySelector(selector);
         while (sectionBanner.firstChild) {
             sectionBanner.removeChild(sectionBanner.firstChild);
         }
-        createStar(num, range);
-    });
+        createStar(num, range, selector);
+    }));
 }
 
 /*

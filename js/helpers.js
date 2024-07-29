@@ -79,7 +79,6 @@ async function getRandomImgUrl(min, max, minformat = 1, maxformat = 2, category 
     let randomImg;
     do {
         randomImg = getRandomImg(min, max, minformat, maxformat, imgUrl, format);
-        console.log(randomImg);
         exitPic = await tools.checkImage(randomImg);
     } while (!exitPic);
     selector.style.backgroundImage = `url(${randomImg})`;
