@@ -234,6 +234,13 @@ class GreetingModel{
     }
 }
 
+/*
+selector: 选择器
+waveNum: 波浪数量
+buttonName: 按钮名字
+buttonFunction: 按钮功能
+str: 字符串,用于底下文字
+*/
 class WaveSet {
     selector = '.wave_container';
     waveNum = 5;
