@@ -165,7 +165,13 @@ function generateTimeCard(TimeClass) {
         const svgIcon = isDayTime ? svgs.generateSVG('sun') : svgs.generateSVG('moon');// Clear the existing content in the timeCard
         timeCard.textContent = '';// Create and append the time display
         const timeTextP = creates.createElementWithClass('p', 'time-text');
-        timeTextP.textContent = timeString + (ampm ? ' ' + ampm : '');
+        // timeTextP.textContent = timeString + (ampm ? ' ' + ampm : '');
+        timeTextP.textContent = timeString;
+        if (ampm) {
+            const ampmText = creates.createElementWithClass('span', 'time-sub-text');
+            ampmText.textContent = ampm;
+            timeTextP.appendChild(ampmText);
+        }
         timeCard.appendChild(timeTextP);// Create and append the day display
         const dayTextP = creates.createElementWithClass('p', 'day-text');
         dayTextP.textContent = dayText;

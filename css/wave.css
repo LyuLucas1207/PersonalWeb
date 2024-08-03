@@ -66,16 +66,16 @@
 
 @media screen and (max-width: 1000px) {
     .infotop h1 {
-        font-size: 2.2vh;
+        font-size: 2.5vh;
     }
 
     .infotop p {
-        font-size: 1vh;
+        font-size: 2vh;
         margin-top: 1.5vh;
     }
 
-    .infotop bottom {
-        font-size: 2.2vh;
+    .infotop button {
+        font-size: 2.5vh;
     }
 
 }
