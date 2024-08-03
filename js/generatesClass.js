@@ -191,56 +191,80 @@ class Time {
 }
 
 /*
-function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTime, greeting = null, buttonName = [], ...buttonFunction) {
-    if (greeting === null) return;
-    const { modalBackground, modalContent } = creates.createModalBackground(flag);
-    let greetingThing;
-    if (typeof greeting === 'function') {
-        greetingThing = greeting();// 如果greeting是一个函数，则调用函数
-    } else if (typeof greeting === 'string') {
-        if (accordingToTime) {
-            greetingThing = helpers.getGreeting(greeting, accordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
-        } else {
-            greetingThing = greeting;
-        }
-    } else {
-        throw new Error('greeting must be a function or a string');
-    }
-    const greetingP = document.createElement('p');
-    greetingP.textContent = greetingThing;
-    const ButtonContainer = creates.createElementWithClass('div', 'button_container');
-
-    if (buttonName.length === 0) { // 如果没有按钮，则不生成按钮
-        document.body.appendChild(modalBackground);
-        modalContent.appendChild(greetingP);
-        document.body.appendChild(modalBackground);
-        return;
-    } else { // 如果有按钮，则生成对应数量名字的按钮以及应用对应...buttonFunction中的函数
-        for (let i = 0; i < buttonName.length; i++) {
-            const BackgroundButton = creates.createButton(buttonName[i], function () {
-                buttonFunction[i]();
-            });
-            ButtonContainer.appendChild(BackgroundButton);
-        }
-    }
-    modalContent.appendChild(greetingP);
-    modalContent.appendChild(ButtonContainer);
-    document.body.appendChild(modalBackground);
-    events.closeModalOnClickOutside(modalBackground, modalContent);
-    setTimeout(() => {
-        if (document.body.contains(modalBackground)) {
-            document.body.removeChild(modalBackground);
-        }
-    }, showingTime * 1000);
-}
-
+flag: 标志, 用于生成对应class的model
+accordingToTime: 根据时间显示
+showingTime: 显示时间
+greeting: 问候语, 可以是函数
+buttonName: 按钮名字
+buttonFunction: 按钮功能
 */
 
 class GreetingModel{
-    
+    flag = 'loaderAfter';
+    accordingToTime = null;
+    showingTime = 30;
+    greeting = null;
+    buttonName = [];
+    buttonFunction = [];
+    constructor(flag, accordingToTime, showingTime, greeting, buttonName, buttonFunction){
+        this.flag = flag;
+        this.accordingToTime = accordingToTime;
+        this.showingTime = showingTime;
+        this.greeting = greeting;
+        this.buttonName = buttonName;
+        this.buttonFunction = buttonFunction;
+    }
+    get Flag() {
+        return this.flag;
+    }
+    get AccordingToTime() {
+        return this.accordingToTime;
+    }
+    get ShowingTime() {
+        return this.showingTime;
+    }
+    get Greeting() {
+        return this.greeting;
+    }
+    get ButtonName() {
+        return this.buttonName;
+    }
+    get ButtonFunction() {
+        return this.buttonFunction;
+    }
+}
+
+class WaveSet {
+    selector = '.wave_container';
+    waveNum = 5;
+    buttonName = [];
+    buttonFunction = [];
+    str = [];
+    constructor(selector, waveNum, buttonName, buttonFunction, str){
+        this.selector = selector;
+        this.waveNum = waveNum;
+        this.buttonName = buttonName;
+        this.buttonFunction = buttonFunction;
+        this.str = str;
+    }
+    get Selector() {
+        return this.selector;
+    }
+    get WaveNum() {
+        return this.waveNum;
+    }
+    get ButtonName() {
+        return this.buttonName;
+    }
+    get ButtonFunction() {
+        return this.buttonFunction;
+    }
+    get Str() {
+        return this.str;
+    }
 }
 
 
 
-export { Favicon, Rain, RandomBackgroundColor, Star, Time};
+export { Favicon, Rain, RandomBackgroundColor, Star, Time, GreetingModel, WaveSet };
 

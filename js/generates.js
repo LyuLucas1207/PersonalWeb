@@ -4,7 +4,7 @@ import * as events from './events.js';
 import * as creates from './creates.js';
 import { singleton } from './lib-js/singleton.js';
 import { debounce } from './lib-js/debounce.js';
-import { Favicon, Rain, RandomBackgroundColor, Star,Time } from './generatesClass.js';
+import { Favicon, Rain, RandomBackgroundColor, Star, Time, GreetingModel, WaveSet } from './generatesClass.js';
 
 /*
 生成网页icon
@@ -184,24 +184,20 @@ function generateTimeCard(TimeClass) {
 
 /*
 生成问候语
-selector: 选择器, 选择头像元素
-greeting: 问候语
-accordingToTime: 是否根据时间生成问候语
-showingTime: 显示时间
-flag: 标志，用于生成模态框
 generateGreetingModel（）: 生成问候语模态框
 */
-function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTime, greeting = null, buttonName = [], ...buttonFunction) {
-    if (greeting === null) return;
-    const { modalBackground, modalContent } = creates.createModalBackground(flag);
+function generateGreetingModel(GreetingModelClass) {
+    if (!(GreetingModelClass instanceof GreetingModel)) throw new Error('This is not GreetingModel Class');
+    if (GreetingModelClass.Greeting === null) return;
+    const { modalBackground, modalContent } = creates.createModalBackground(GreetingModelClass.Flag);
     let greetingThing;
-    if (typeof greeting === 'function') {
-        greetingThing = greeting();// 如果greeting是一个函数，则调用函数
-    } else if (typeof greeting === 'string') {
-        if (accordingToTime) {
-            greetingThing = helpers.getGreeting(greeting, accordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
+    if (typeof GreetingModelClass.Greeting === 'function') {
+        greetingThing = GreetingModelClass.Greeting();// 如果greeting是一个函数，则调用函数
+    } else if (typeof GreetingModelClass.Greeting === 'string') {
+        if (GreetingModelClass.AccordingToTime) {
+            greetingThing = helpers.getGreeting(GreetingModelClass.Greeting, GreetingModelClass.AccordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
         } else {
-            greetingThing = greeting;
+            greetingThing = GreetingModelClass.Greeting;
         }
     } else {
         throw new Error('greeting must be a function or a string');
@@ -210,15 +206,15 @@ function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTim
     greetingP.textContent = greetingThing;
     const ButtonContainer = creates.createElementWithClass('div', 'button_container');
 
-    if (buttonName.length === 0) { // 如果没有按钮，则不生成按钮
+    if (GreetingModelClass.ButtonName.length === 0) { // 如果没有按钮，则不生成按钮
         document.body.appendChild(modalBackground);
         modalContent.appendChild(greetingP);
         document.body.appendChild(modalBackground);
         return;
     } else { // 如果有按钮，则生成对应数量名字的按钮以及应用对应...buttonFunction中的函数
-        for (let i = 0; i < buttonName.length; i++) {
-            const BackgroundButton = creates.createButton(buttonName[i], function () {
-                buttonFunction[i]();
+        for (let i = 0; i < GreetingModelClass.ButtonName.length; i++) {
+            const BackgroundButton = creates.createButton(GreetingModelClass.ButtonName[i], function () {
+                GreetingModelClass.ButtonFunction[i]();
             });
             ButtonContainer.appendChild(BackgroundButton);
         }
@@ -231,7 +227,7 @@ function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTim
         if (document.body.contains(modalBackground)) {
             document.body.removeChild(modalBackground);
         }
-    }, showingTime * 1000);
+    }, GreetingModelClass.ShowingTime * 1000);
 }
 
 /*
@@ -239,32 +235,28 @@ function generateGreetingModel(flag = 'loaderAfter', accordingToTime, showingTim
 selector: 选择器, 选择海浪生成的位置
 waveNum: 海浪数量
 buttonfn: 按钮点击事件处理函数
-buttonName: 按钮文本
-str: p标签文本
+WaveSet.ButtonName: 按钮文本
+WaveSet.Str: p标签文本
 generateWave(): 生成海浪
-
-            <div class="infotop">
-              <button>切换背景</button>
-              <p>WorldV</p>
-            </div>
 */
-function generateWave(selector = 'wave_container', waveNum = 3, buttonName = [], buttonfn = [], str = []) {
-    let buttonNameLength = buttonName.length;
-    let buttonfnLength = buttonfn.length;
-    let strLength = str.length;
+function generateWave(WaveSetClass) {
+    if (!(WaveSetClass instanceof WaveSet)) throw new Error('This is not WaveSet Class');
+    let buttonNameLength = WaveSetClass.ButtonName.length;
+    let buttonfnLength = WaveSetClass.ButtonFunction.length;
+    let strLength = WaveSetClass.Str.length;
 
     let buttonNameCount = 0;
     let buttonfnCount = 0;
     let strCount = 0;
 
-    document.querySelectorAll(selector).forEach((waveContainer) => {
+    document.querySelectorAll(WaveSetClass.Selector).forEach((waveContainer) => {
         let waveTop = []; /*random from 100% to 200%*/
         let waveDuration = []; /*random from 1000ms to 5000ms*/
         let waveWidth = []; /*150% to 200%*/
         let waveHeight = []; /*200% to 300%*/
         let waveOpacity = []; /*0.1 to 0.8*/
         let waveBorderRadius = []; /*30% to 50%*/
-        for (let i = 0; i < waveNum; i++) {
+        for (let i = 0; i < WaveSetClass.WaveNum; i++) {
             waveTop.push(Math.floor(Math.random() * 100 + 100) + '%');/*random from 100% to 200%*/
             waveDuration.push(Math.floor(Math.random() * 4000 + 1000) + 'ms');/*random from 1000ms to 5000ms*/
             waveWidth.push(Math.floor(Math.random() * 50 + 150) + '%');/*150% to 200%*/
@@ -275,7 +267,7 @@ function generateWave(selector = 'wave_container', waveNum = 3, buttonName = [],
         waveWidth[0] = '200%';
         waveHeight[0] = '300%';
 
-        for (let i = 0; i < waveNum; i++) {
+        for (let i = 0; i < WaveSetClass.WaveNum; i++) {
             let wave = creates.createElementWithClass('div', 'wave');
             wave.id = `wave-${i}`;
             if (i !== 0) {
@@ -292,14 +284,14 @@ function generateWave(selector = 'wave_container', waveNum = 3, buttonName = [],
         if (buttonNameCount < buttonNameLength || buttonfnCount < buttonfnLength || strCount < strLength) {
             const infotop = creates.createElementWithClass('div', 'infotop');
             if (buttonNameLength !== 0) {
-                const button = creates.createButton(buttonName[buttonNameCount], buttonfn[buttonfnCount]);
+                const button = creates.createButton(WaveSetClass.ButtonName[buttonNameCount], WaveSetClass.ButtonFunction[buttonfnCount]);
                 infotop.appendChild(button);
                 buttonNameCount++;
                 buttonfnCount++;
             }
             if (strLength !== 0) {
                 const p = document.createElement('p');
-                p.textContent = str[strCount];
+                p.textContent = WaveSetClass.Str[strCount];
                 infotop.appendChild(p);
                 strCount++;
             }
