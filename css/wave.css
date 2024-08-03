@@ -1,0 +1,92 @@
+.wave_container {
+    background: transparent;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 2vh;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+    .wave_container {
+        border-radius: 2vw;
+    }
+}
+
+.wave {
+    position: absolute;
+    margin-left: -50%;
+    margin-top: -70%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.99) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+    animation: wave_move 5s infinite linear;
+}
+
+
+.infotop {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    z-index: 100;
+
+}
+
+.infotop h1 {
+    font-size: 2.2vw;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+
+.infotop p {
+    font-size: 1vw;
+    font-weight: 300;
+    margin-top: 1.5vw;
+    /* text-transform: lowercase; */
+    color: rgb(0, 0, 0);
+}
+
+.infotop button {
+    font-size: 2.2vw;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(5, 3, 3);
+    border: none;
+    cursor: pointer;
+}
+
+.wave_container:hover button {
+    transform: scale(1.2);
+    transition: 0.2s ease-in-out;
+    background-color: inherit;
+    text-shadow: 0 0 1vw rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 1000px) {
+    .infotop h1 {
+        font-size: 2.2vh;
+    }
+
+    .infotop p {
+        font-size: 1vh;
+        margin-top: 1.5vh;
+    }
+
+    .infotop bottom {
+        font-size: 2.2vh;
+    }
+
+}
+
+
+@keyframes wave_move {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -21,7 +21,7 @@
     }
   }
   
-  .cloud {
+  .rain_cloud {
     overflow: hidden;
     height: 5vw;
     display: flex;
@@ -29,12 +29,12 @@
   }
 
   @media screen and (max-width: 1000px) {
-    .cloud {
+    .rain_cloud {
         height: 5vh;
     }
   }
   
-  .cloud_left {
+  .rain_cloud_left {
     position: relative;
     background-color: #234;
     width: 10vw;
@@ -43,7 +43,7 @@
     left: 1vw;
   }
   
-  .cloud_right {
+  .rain_cloud_right {
     position: relative;
     background-color: #203040;
     width: 7vw;
@@ -54,12 +54,12 @@
   }
 
   @media screen and (max-width: 1000px) {
-    .cloud_left {
+    .rain_cloud_left {
         width: 10vh;
         height: 10vh;
         left: 1vh;
     }
-    .cloud_right {
+    .rain_cloud_right {
         width: 7vh;
         height: 7vh;
         top: 1.5vh;
