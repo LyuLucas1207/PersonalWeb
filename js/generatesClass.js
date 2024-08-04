@@ -143,6 +143,47 @@ class RandomBackgroundColor{
         return this.max_opacity;
     }
 }
+/*
+*/
+class RandomBackgroundImage{
+    selector = null;
+    min = 1;
+    max = 13;
+    minformat = 1;
+    maxformat = 2;
+    url = './img/Background/background';
+    format = 'jpg';
+    constructor(selector, min, max, minformat, maxformat, url, format){
+        this.selector = selector;
+        this.min = min;
+        this.max = max;
+        this.minformat = minformat;
+        this.maxformat = maxformat;
+        this.url = url;
+        this.format = format;
+    }
+    get Selector() {
+        return this.selector;
+    }
+    get Min() {
+        return this.min;
+    }
+    get Max() {
+        return this.max;
+    }
+    get Minformat() {
+        return this.minformat;
+    }
+    get Maxformat() {
+        return this.maxformat;
+    }
+    get Url() {
+        return this.url;
+    }
+    get Format() {
+        return this.format;
+    }
+}
 
 /*
 selector: 选择器
@@ -273,5 +314,5 @@ class WaveSet {
 
 
 
-export { Favicon, Rain, RandomBackgroundColor, Star, Time, GreetingModel, WaveSet };
+export { Favicon, Rain, RandomBackgroundColor, RandomBackgroundImage ,Star, Time, GreetingModel, WaveSet };
 

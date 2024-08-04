@@ -4,7 +4,7 @@ import * as events from './events.js';
 import * as creates from './creates.js';
 import { singleton } from './lib-js/singleton.js';
 import { debounce } from './lib-js/debounce.js';
-import { Favicon, Rain, RandomBackgroundColor, Star, Time, GreetingModel, WaveSet } from './generatesClass.js';
+import { Favicon, Rain, RandomBackgroundColor, RandomBackgroundImage, Star, Time, GreetingModel, WaveSet } from './generatesClass.js';
 
 /*
 生成网页icon
@@ -139,6 +139,10 @@ function createStar(StarClass) {
     });
 }
 function generateStar(StarClass) {
+    let sectionBanner = document.querySelector(StarClass.Selector);
+    while (sectionBanner.firstChild) {
+        sectionBanner.removeChild(sectionBanner.firstChild);
+    }
     createStar(StarClass);
     window.addEventListener('resize', debounce(function () {
         let sectionBanner = document.querySelector(StarClass.Selector);
@@ -308,6 +312,33 @@ function generateWave(WaveSetClass) {
 
 
 /*
+生成背景图片
+selector: 选择器, 选择海浪生成的位置
+min：图片最小编号
+max：图片最大编号
+minformat ：图片格式最小编号
+maxformat ：图片格式最大编号
+imgUrl ：图片路径
+format ：图片格式
+*/
+
+function generateRandomBackgroundImage(RandomBackgroundImageClass) {
+    if (!(RandomBackgroundImageClass instanceof RandomBackgroundImage)) throw new Error('This is not RandomBackgroundImage Class');
+    let sel = document.querySelector(RandomBackgroundImageClass.Selector);
+    if (sel === null) return;
+    const url = helpers.getRandomImg(RandomBackgroundImageClass.Min, 
+        RandomBackgroundImageClass.Max, 
+        RandomBackgroundImageClass.Minformat, 
+        RandomBackgroundImageClass.Maxformat, 
+        RandomBackgroundImageClass.Url, 
+        RandomBackgroundImageClass.Format);
+    sel.style.backgroundImage = `url(${url})`;
+}
+
+
+
+
+/*
 导出固定class的生成元素
 只能通过generateElements方法调用，单例模式防止多次实例化
 */
@@ -339,6 +370,7 @@ const Elements = singleton(GEs);
 addMethod(Elements, 'favicon', generateFavicon);
 addMethod(Elements, 'rain', generateRain);
 addMethod(Elements, 'backgroundColor', generateRandomBackgroundColor);
+addMethod(Elements, 'backgroundImage', generateRandomBackgroundImage);
 addMethod(Elements, 'star', generateStar);
 addMethod(Elements, 'timeCard', generateTimeCard);
 addMethod(Elements, 'greeting', generateGreetingModel);

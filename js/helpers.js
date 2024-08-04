@@ -73,15 +73,15 @@ category: 可能的值有 标签，class, id, 以及其他的选择器
 =======================Export===========================
 getRandomImgUrl():配置已经生成好的检验过关的url, min和max 将会被getRandomImg使用
 */
-async function getRandomImgUrl(min, max, minformat = 1, maxformat = 2, category = 'body', imgUrl = './img/Background/background', format = null) {
-    let selector = document.querySelector(category);
+async function getRandomImgUrl(min, max, minformat = 1, maxformat = 2, imgUrl = './img/Background/background', format = null) {
     let exitPic = false;
     let randomImg;
     do {
         randomImg = getRandomImg(min, max, minformat, maxformat, imgUrl, format);
         exitPic = await tools.checkImage(randomImg);
     } while (!exitPic);
-    selector.style.backgroundImage = `url(${randomImg})`;
+    // selector.style.backgroundImage = `url(${randomImg})`;
+    return randomImg;
 }
 
 /*
