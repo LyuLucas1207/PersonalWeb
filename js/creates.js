@@ -8,12 +8,13 @@ const reloadButton = createButton('重新加载', function () {
 location.reload();
 });
 */
-function createButton(text, onClickHandler,className = null) {
+function createButton(text, onClickHandler, className = null) {
     const button = document.createElement('button');
     button.textContent = text;
     if (className !== null) {
         button.className = className;
     }
+
     button.addEventListener('click', onClickHandler);
     return button;
 }
