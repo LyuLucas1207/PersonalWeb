@@ -38,6 +38,7 @@
     margin: 0;
     padding: 0;
     font-family: 'YouSheYuFeiTeJianKangTi', 'HongLeiXingShuJianTi', 'SmileySans-Oblique', 'AlimamaFangYuanTiVF-Thin', 'MaoKenWangXingYuan';
+    
 }
 
 body {
@@ -194,8 +195,9 @@ body::before {
 
 @media screen and (max-width: 1000px) {
     .center_container {
+        overflow: hidden;
         grid-template-columns: repeat(2, 1fr);
-        gap: 4vw;
+        gap: 3vw;
         margin: 1vh;
         grid-template-areas:
             "item5 item5"

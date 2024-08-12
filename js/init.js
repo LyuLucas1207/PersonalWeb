@@ -4,7 +4,16 @@ import * as parallels from './lib-js/parallelTask.js';
 import * as helpers from './helpers.js';
 
 import Elements from './generates.js';
-import { Favicon, Rain, RandomBackgroundColor, RandomBackgroundImage, Star, Time, GreetingModel, WaveSet } from './generatesClass.js';
+import { 
+    Favicon, 
+    Rain, 
+    RandomBackgroundColor, 
+    RandomBackgroundImage, 
+    Star, 
+    Time, 
+    GreetingModel, 
+    WaveSet 
+} from './generatesClass.js';
 
 // Generate various elements and functionalities
 const fn1 = () => Elements.generateElements('rain', rain);
