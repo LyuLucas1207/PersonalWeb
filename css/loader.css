@@ -8,9 +8,9 @@
     flex-direction: column;
     z-index: 9999;
     background-color: rgb(255, 255, 255);
-  }
+}
 
-  @keyframes out_from_bottom {
+@keyframes out_from_bottom {
     0% {
         opacity: 1;
         transform: translateY(0);
@@ -19,31 +19,31 @@
         opacity: 0;
         transform: translateY(100vh);
     }
-  }
-  
-  .rain_cloud {
+}
+
+.rain_cloud {
     overflow: hidden;
     height: 5vw;
     display: flex;
     flex-direction: row;
-  }
+}
 
-  @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .rain_cloud {
         height: 5vh;
     }
-  }
-  
-  .rain_cloud_left {
+}
+
+.rain_cloud_left {
     position: relative;
     background-color: #234;
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
     left: 1vw;
-  }
-  
-  .rain_cloud_right {
+}
+
+.rain_cloud_right {
     position: relative;
     background-color: #203040;
     width: 7vw;
@@ -51,23 +51,24 @@
     border-radius: 50%;
     top: 1.5vw;
     right: 1vw;
-  }
+}
 
-  @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .rain_cloud_left {
         width: 10vh;
         height: 10vh;
         left: 1vh;
     }
+
     .rain_cloud_right {
         width: 7vh;
         height: 7vh;
         top: 1.5vh;
         right: 1vh;
     }
-  }
-  
-  .rain {
+}
+
+.rain {
     width: 15vw;
     height: 14vw;
     overflow-y: hidden;
@@ -75,82 +76,84 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     overflow-y: hidden;
-  }
+}
 
-  .rain::-webkit-scrollbar {
+.rain::-webkit-scrollbar {
     display: none;
-  }
+}
 
-  @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .rain {
         width: 15vh;
         height: 14vh;
     }
-  }
-  
-  .drop {
+}
+
+.drop {
     position: absolute;
     width: 0.2vw;
     background: #789;
     animation: rain_401 0.8s infinite ease-out;
-  }
-  
-  
-  @media screen and (max-width: 1000px) {
+}
+
+
+@media screen and (max-width: 1000px) {
     .drop {
         width: 0.2vh;
     }
-  }
-  
-  @keyframes rain_401 {
-    0% {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-  
-    100% {
-      opacity: 0.2;
-      transform: translate(0, 10vw);
-    }
-  }
+}
 
-    @media screen and (max-width: 1000px) {
-        @keyframes rain_401 {
-            0% {
+@keyframes rain_401 {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    100% {
+        opacity: 0.2;
+        transform: translate(0, 10vw);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    @keyframes rain_401 {
+        0% {
             opacity: 1;
             transform: translate(0, 0);
-            }
-        
-            100% {
+        }
+
+        100% {
             opacity: 0.2;
             transform: translate(0, 8vh);
-            }
         }
     }
-  .surface {
+}
+
+.surface {
     width: 15vw;
     height: 2vw;
-    top : -3vw;
+    top: -3vw;
     box-sizing: border-box;
     position: relative;
     overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
-  }
-  .surface::-webkit-scrollbar {
+}
+
+.surface::-webkit-scrollbar {
     display: none;
 }
 
 
-    @media screen and (max-width: 1000px) {
-        .surface {
-            width: 15vh;
-            height: 2vh;
-            top : -3vh;
-        }
+@media screen and (max-width: 1000px) {
+    .surface {
+        width: 15vh;
+        height: 2vh;
+        top: -3vh;
     }
-  
-  .hit {
+}
+
+.hit {
     position: absolute;
     width: 0.3vw;
     height: 0.1vw;
@@ -158,25 +161,125 @@
     border: 1px solid #456;
     border-radius: 50%;
     animation: hit_401 0.8s infinite ease;
- 
-  }
 
-  @media screen and (max-width: 1000px) {
+}
+
+@media screen and (max-width: 1000px) {
     .hit {
         width: 0.3vh;
         height: 0.1vh;
         bottom: 1vh;
     }
-  }
-  
-  @keyframes hit_401 {
+}
+
+@keyframes hit_401 {
     0% {
-      opacity: 0.75;
-      transform: scale(1);
+        opacity: 0.75;
+        transform: scale(1);
     }
-  
+
     100% {
-      opacity: 0;
-      transform: scale(2.5);
+        opacity: 0;
+        transform: scale(2.5);
     }
-  }
+}
+
+
+/* 模态窗口的基本样式 */
+.loaderAfter_modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loaderAfter_modal-content {
+    width: 30vw;
+    height: max-content;
+    background-color: rgba(255, 255, 255, 0.696);
+    padding: 2vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 0.4vw 0.6vw rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .loaderAfter_modal-content {
+        width: 30vh;
+        height: 10vh;
+        border-radius: 0.5vh;
+        padding: 2vh;
+        box-shadow: 0 0 0.4vh 0.6vh rgb(255, 255, 255);
+    }
+
+}
+
+.loaderAfter_modal-content p {
+    margin: 0;
+    font-size: 1.5vw;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1000px) {
+    .loaderAfter_modal-content p {
+        font-size: 1.5vh;
+    }
+}
+
+.loaderAfter_modal-content .button_container {
+    /*物体居中 ，不使用flex*/
+    display: flex;
+    flex-wrap: wrap; /*超出换行*/
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    margin-top: 1vw;
+}
+
+.loaderAfter_modal-content button {
+    margin: 0.5vw 2vw;
+    width: max-content;
+    padding: 0.5vw 1vw;
+    height: max-content;
+    font-size: 0.8vw;
+    background-color: rgba(6, 0, 0, 0.975);
+    color: white;
+    border: none;
+    border-radius: 0.3vw;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .loaderAfter_modal-content button {
+        margin: 0.5vh 2vh;
+        font-size: 0.8vh;
+        padding: 0.5vh 1vh;
+        border-radius: 0.3vh;
+    }
+}
+
+.loaderAfter_modal-content button:hover {
+    background-color: rgba(255, 255, 255, 0);
+    transform: scale(1.1);
+    color: black;
+    box-shadow: 0 0 0.2vw 0.2vw rgba(0, 0, 0, 0.5);
+    font-size: 0.9vw;
+    transition: all 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 1000px) {
+    .loaderAfter_modal-content button:hover {
+        font-size: 0.9vh;
+        box-shadow: 0 0 0.2vh 0.2vh rgba(0, 0, 0, 0.5);
+    }
+}
