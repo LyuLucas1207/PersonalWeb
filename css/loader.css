@@ -200,39 +200,24 @@
 }
 
 .loaderAfter_modal-content {
-    width: 30vw;
-    height: max-content;
-    background-color: rgba(255, 255, 255, 0.696);
-    padding: 2vw;
-    border-radius: 0.5vw;
-    box-shadow: 0 0 0.4vw 0.6vw rgb(255, 255, 255);
+    width: 600px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.66);
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 0.1px 0.5px rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-@media screen and (max-width: 1000px) {
-    .loaderAfter_modal-content {
-        width: 30vh;
-        height: 10vh;
-        border-radius: 0.5vh;
-        padding: 2vh;
-        box-shadow: 0 0 0.4vh 0.6vh rgb(255, 255, 255);
-    }
-
-}
 
 .loaderAfter_modal-content p {
+    font-family:  'f4', 'f6', 'f1', 'f5';
     margin: 0;
-    font-size: 1.5vw;
+    font-size: 28px;
     font-weight: 600;
-}
-
-@media screen and (max-width: 1000px) {
-    .loaderAfter_modal-content p {
-        font-size: 1.5vh;
-    }
 }
 
 .loaderAfter_modal-content .button_container {
@@ -246,12 +231,13 @@
     margin-top: 1vw;
 }
 
-.loaderAfter_modal-content button {
-    margin: 0.5vw 2vw;
-    width: max-content;
-    padding: 0.5vw 1vw;
-    height: max-content;
-    font-size: 0.8vw;
+.loaderAfter_modal-content-button {
+    font-family: 'f5', 'f1', 'f5', 'f4';
+    margin: 5px 20px;
+    width: 130px;
+    padding: 5px 10px;
+    height: 50px;
+    font-size: 12px;
     background-color: rgba(6, 0, 0, 0.975);
     color: white;
     border: none;
@@ -259,27 +245,11 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1000px) {
-    .loaderAfter_modal-content button {
-        margin: 0.5vh 2vh;
-        font-size: 0.8vh;
-        padding: 0.5vh 1vh;
-        border-radius: 0.3vh;
-    }
-}
 
-.loaderAfter_modal-content button:hover {
+.loaderAfter_modal-content-button:hover {
     background-color: rgba(255, 255, 255, 0);
-    transform: scale(1.1);
     color: black;
     box-shadow: 0 0 0.2vw 0.2vw rgba(0, 0, 0, 0.5);
-    font-size: 0.9vw;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 1000px) {
-    .loaderAfter_modal-content button:hover {
-        font-size: 0.9vh;
-        box-shadow: 0 0 0.2vh 0.2vh rgba(0, 0, 0, 0.5);
-    }
-}

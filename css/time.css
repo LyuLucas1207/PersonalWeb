@@ -1,100 +1,53 @@
 .time_card {
     position: absolute;
-    width: 20vw;
-    height: 12vw;
+    width: 100%;
+    height: 100%;
     display: flex;
-    color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0, 1);
     justify-content: center;
     align-items: center;
     flex-direction: column;
     transition: all 1s ease-in-out;
     overflow: hidden;
-    border-radius: 2vh;
-}
-
-
-
-@media screen and (max-width: 1000px) {
-    .time_card {
-        border-radius: 2vw;
-        width: 20vh;
-        height: 12vh;
-    }
-    
+    border-radius: 2px;
 }
 
 .time_card:hover {
     box-shadow: rgb(0, 0, 0) 0.5vw 0.5vw 1vw, rgb(0, 0, 0) -0.5vw 0vw 5vw;
 }
 
-@media screen and (max-width: 1000px) {
-    .time_card:hover {
-        box-shadow: rgb(0, 0, 0) 0.5vh 0.5vh 0.1vh, rgb(0, 0, 0) -0.5vh 0vh 5vh;
-    }
-    
-}
 
 .time-text {
-    font-size: 3vw;
+    font-size: 20px;
     margin: 0vw;
     font-weight: 600;
-    text-shadow: 0.1vw -0.1vw #fff,
-                -0.1vw 0.1vw #999,
-                -1vw 1vw 1vw #80808080;
+    text-shadow: 1px -0.1px #fff,
+                -0.1px 1px#999,
+                -1px 1px 1px #80808080;
 }
 
-@media screen and (max-width: 1000px) {
-    .time-text {
-        font-size: 3.7vh;
-        text-shadow: 0.1vh -0.1vh #fff,
-                -0.1vh 0.1vh #999,
-                -1vh 1vh 1vh #80808080;
-    }
-}
 
 .time-sub-text {
-    font-size: 1.2vw;
+    font-size: 12px;
 }
 
-@media screen and (max-width: 1000px) {
-    .time-sub-text {
-        font-size: 1.2vh;
-    }
-}
+
 
 .day-text {
-    font-size: 1.3vw;
-    font-weight: 500;
+    font-size: 12px;
 }
 
-@media screen and (max-width: 1000px) {
-    .day-text {
-        font-size: 1.6vh;
-    }
-}
 
 .moon,.sun {
-    font-size: 2vw;
+    font-size: 16px;
     position: absolute;
-    top:1.5vh;
-    right: 1.5vh;
+    top: 12px;
+    right: 12px;
     transition: all 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 1000px) {
-    .moon,.sun {
-        font-size: 2vh;
-        top:1vh;
-        right: 1vh;
-    }
-}
 
 .time_card:hover>.moon,.time_card:hover>.sun {
-    font-size: 2.3vw;
+    font-size: 20px;
 }
 
-@media screen and (max-width: 1000px) {
-    .time_card:hover>.moon,.time_card:hover>.sun {
-        font-size: 2.3vh;
-    }
-}

@@ -1,7 +1,7 @@
 .avatar {
-    position: fixed;
-    top: 2vw;
-    left: 2vw;
+    /* position: fixed; */
+    top: 20px;
+    left: 20px;
     width: max-content;
     height: max-content;
     border-radius: 7.5vw;
@@ -10,29 +10,15 @@
 
 }
 
-@media screen and (max-width: 1000px) {
-    .avatar {
-        top: 3vh;
-        left: 3vh;
-    }
-}
+
 
 .avatar_cover,
 .avatar_img {
-    height: 4vw;
-    width: 4vw;
+    height: 50px;
+    width: 50px;
     border-radius: 7.5vw;
 }
 
-@media screen and (max-width: 1000px) {
-
-    .avatar_cover,
-    .avatar_img {
-        width: 7vh;
-        height: 7vh;
-        border-radius: 7.5vh;
-    }
-}
 
 .avatar_cover {
     height: max-content;
@@ -63,9 +49,9 @@
 .avatar_name {
     position: absolute;
     right: 0;
-    height: 4vw;
-    padding-right: 2vw;
-    font-size: 1.5vw;
+    height: 30px;
+    padding-right:30px;
+    font-size: 18px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0);
     border-radius: 8vw;
@@ -75,15 +61,6 @@
 
 }
 
-@media screen and (max-width: 1000px) {
-    .avatar_name {
-        height: 7vh;
-        font-size: 2vh;
-        border-radius: 8vh;
-        padding-right: 1vh;
-        right: 2vh;
-    }
-}
 
 @keyframes colorChange {
     0% {
@@ -110,18 +87,11 @@
 }
 
 .expanded {
-    width: 16vw;
+    width: 150px;
     box-shadow: 0vw 0vw 0.3vw 0.3vw rgba(255, 255, 255, 0.5);
     scale: 0.98;
     background-color: rgba(0, 0, 0, 0.8);
 
-}
-
-@media screen and (max-width: 1000px) {
-    .expanded {
-        width: 22vh;
-        box-shadow: 0vh 0vh 0.3vh 0.3vh rgba(255, 255, 255, 0.5);
-    }
 }
 
 .expanded .avatar_img {

@@ -108,7 +108,8 @@ generateStar(): 用于判断刷新页面时重新生成星星
 function createStar(StarClass) {
     if (!(StarClass instanceof Star)) throw new Error('This is not Star Class');
     document.querySelectorAll(StarClass.Selector).forEach((sectionBanner) => {
-        let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
+        // let unit = window.innerWidth > 1000 ? 'vh' : 'vw';
+        let unit = 'px';
         let position = helpers.getRandomPosition(StarClass.num, unit, StarClass.Range);
         for (let i = 0; i < StarClass.num; i++) {
             let starDiv = document.createElement('div');
@@ -205,7 +206,7 @@ function generateGreetingModel(GreetingModelClass) {
         greetingThing = GreetingModelClass.Greeting();// 如果greeting是一个函数，则调用函数
     } else if (typeof GreetingModelClass.Greeting === 'string') {
         if (GreetingModelClass.AccordingToTime) {
-            greetingThing = helpers.getGreeting(GreetingModelClass.Greeting, GreetingModelClass.AccordingToTime, '日出金山，早上好！', '日中繁花，中午好！', '日落西山，晚上好！', '夜幕降临，深夜好！');
+            greetingThing = helpers.getGreeting(GreetingModelClass.Greeting, GreetingModelClass.AccordingToTime, 'Sunrise over the mountains, good morning!', 'Blossoms in the midday, good afternoon!', 'Sunset in the west, good evening!', 'Nightfall descends, good night!');
         } else {
             greetingThing = GreetingModelClass.Greeting;
         }
@@ -225,7 +226,7 @@ function generateGreetingModel(GreetingModelClass) {
         for (let i = 0; i < GreetingModelClass.ButtonName.length; i++) {
             const BackgroundButton = creates.createButton(GreetingModelClass.ButtonName[i], function () {
                 GreetingModelClass.ButtonFunction[i]();
-            });
+            }, 'loaderAfter_modal-content-button');
             ButtonContainer.appendChild(BackgroundButton);
         }
     }

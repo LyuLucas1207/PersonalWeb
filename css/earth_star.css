@@ -1,7 +1,13 @@
-.section-banner,
+.section-banner{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
 .earth {
-    height: 10vw;
-    width: 10vw;
+    width: 40%;
+    aspect-ratio: 1 / 1;
     position: absolute;
 }
 
@@ -12,27 +18,13 @@
     animation: earthRotate 30s linear 0s infinite;
     border-radius: 50%;
     box-shadow:
-        0vh 0vh 2vh rgba(255, 255, 255, 0.2), -0.5vh 0vh 0.8vh rgba(255, 255, 255, 0.788) inset,
-        1.5vh 0.2vh 2.5vh rgb(0, 0, 0) inset, -2.4vh -0.2vh 3.4vh rgba(255, 255, 255, 0.758) inset,
-        10vh 0vh 4.4vh rgba(0, 0, 0, 0.628) inset, 15vh 0vh 3.8vh rgba(175, 168, 168, 0.025) inset;
+        0px 0px 20px rgba(255, 255, 255, 0.2), -5px 0px 8px rgba(255, 255, 255, 0.788) inset,
+        12px 2px 15px rgb(0, 0, 0) inset, -14px -2px 14px rgba(255, 255, 255, 0.758) inset,
+        10px 0px 12px rgba(0, 0, 0, 0.628) inset, 13px 0px 18px rgba(175, 168, 168, 0.025) inset;
+
     transition: all 0.5s ease-in-out;
 }
 
-@media screen and (max-width: 1000px) {
-
-    .section-banner,
-    .earth {
-        height: 10vh;
-        width: 10vh;
-    }
-
-    .earth {
-        box-shadow:
-            0vw 0vw 2vw rgba(255, 255, 255, 0.2), -0.5vw 0vw 0.8vw rgba(255, 255, 255, 0.788) inset,
-            1.5vw 0.2vw 2.5vw rgb(0, 0, 0) inset, -2.4vw -0.2vw 3.4vw rgba(255, 255, 255, 0.758) inset,
-            10vw 0vw 4.4vw rgba(0, 0, 0, 0.628) inset, 15vw 0vw 3.8vw rgba(175, 168, 168, 0.025) inset;
-    }
-}
 
 @keyframes earthRotate {
     0% {
@@ -65,14 +57,6 @@
     transform: scale(1.1);
 }
 
-@media screen and (max-width: 1000px) {
-    .center_inner_lighting_container:hover .earth {
-        box-shadow: 0vw 0vw 2vw rgba(255, 255, 255, 0.2), -0.5vw 0vw 0.8vw rgba(255, 255, 255, 0),
-            1.5vw 0.2vw 2.5vw rgb(0, 0, 0), -2.4vw -0.2vw 3.4vw rgba(255, 255, 255, 0.553),
-            25vw 0vw 4.4vw rgba(0, 0, 0, 0.628), 15vw 0vw 3.8vw rgba(175, 168, 168, 0.025);
-    }
-}
-
 
 .curved-corner-star {
     display: flex;
@@ -83,8 +67,8 @@
 .curved-corner-bottomright,
 .curved-corner-topleft,
 .curved-corner-topright {
-    width: 0.6vh;
-    height: 0.8vh;
+    width: 5px;
+    height: 7px;
     overflow: hidden;
     position: relative;
     background-color: rgba(255, 255, 255, 0);
@@ -141,26 +125,17 @@
 }
 
 .ring {
-    width: 15vw;
-    height: 15vw;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     transform: rotateX(20deg) rotateY(-15deg);
     position: absolute;
     display: block;
-    border: 0.2vw solid rgba(28, 3, 48, 0.987);
+    border: 2px solid rgba(28, 3, 48, 0.987);
     filter: drop-shadow(0 0 10vw white);
     -webkit-animation: ring-rotating 120s infinite alternate;
     animation: ring-rotating 12s infinite alternate;
     mix-blend-mode: luminosity;
-}
-
-@media screen and (max-width: 1000px) {
-    .ring {
-        width: 15vh;
-        height: 15vh;
-        border: 0.2vh solid rgba(28, 3, 48, 0.987);
-        filter: drop-shadow(0 0 10vh white);
-    }
 }
 
 
