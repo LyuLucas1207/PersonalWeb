@@ -40,7 +40,7 @@ const greeting = new GreetingModel('loaderAfter', false, 30,
         location.reload();
     }, fn8, fn9]);
 
-const wave = new WaveSet('.wave_container', 5, ["切换背景", "切换头像"], [fn8, fn9], ["WorldV"]);
+const wave = new WaveSet('.wave_container', 5, ["Change Background", "Switch Avatar"], [fn8, fn9], ["WorldV"]);
 const background_body = new RandomBackgroundImage('body', 1, 13, 1, 2, './img/Background/background', 'jpg');
 const avatar_img = new RandomBackgroundImage('.avatar_img', 1, 30, 1, 2, './img/Avatar/avatar', 'jpg');
 
