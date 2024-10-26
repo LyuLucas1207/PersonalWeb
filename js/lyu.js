@@ -72,6 +72,9 @@ function update() {
 }
 // 更新人物朝向
 function updateDirection(dx, dy) {
+
+
+
     const threshold = 70;
 
     if (Math.abs(dx) > Math.abs(dy) + threshold) {
@@ -405,3 +408,28 @@ minbutton.addEventListener('click', () => {
     playBeep();
 });
 
+
+let audioContext;
+
+function playBeep() {
+    if (!audioContext) {
+        audioContext = new AudioContext();
+    }
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(
+        [440, 494.88, 523.25, 587.33, 659.25, 698.46, 783.99][Math.floor(Math.random() * 7)],
+        audioContext.currentTime
+    );
+
+    gain.gain.setValueAtTime(0.06, audioContext.currentTime);
+    osc.connect(gain).connect(audioContext.destination);
+    osc.start();
+    osc.stop(audioContext.currentTime + 0.03);
+}

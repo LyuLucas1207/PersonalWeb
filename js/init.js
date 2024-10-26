@@ -4,16 +4,7 @@ import * as parallels from './lib-js/parallelTask.js';
 import * as helpers from './helpers.js';
 
 import Elements from './generates.js';
-import {
-    Favicon,
-    GreetingModel,
-    Rain,
-    RandomBackgroundColor,
-    RandomBackgroundImage,
-    Star,
-    Time,
-    WaveSet
-} from './generatesClass.js';
+import { Favicon, GreetingModel, Rain, RandomBackgroundColor, RandomBackgroundImage, Star, Time, WaveSet} from './generatesClass.js';
 
 // Generate various elements and functionalities
 const fn1 = () => Elements.generateElements('rain', rain);
@@ -30,16 +21,19 @@ const favicon = new Favicon('./img/Icon/icon', 'image/png', 'png', 12);
 const rain = new Rain('.loader', 20, 30, 20, 30);
 const randomBackgroundColor = new RandomBackgroundColor('.center_inner_content_container', true, false, 255, 255, 255, null, null, null, 0.1, 0.6);
 const star = new Star('.section-banner', 125, 2500);
-const time = new Time('.time_card', () => {
-});
+const time = new Time('.time_card', () => {});
 const greeting = new GreetingModel('loaderAfter', false, 30,
     () => {
-        return helpers.getGreeting("Dear Visitor", 'Sunrise over the mountains, good morning!', 'Blossoms in the midday, good afternoon!', 'Sunset in the west, good evening!', 'Nightfall descends, good night!');
+        return helpers.getGreeting("Dear Visitor",
+            'Sunrise over the mountains, good morning!',
+            'Blossoms in the midday, good afternoon!',
+            'Sunset in the west, good evening!',
+            'Nightfall descends, good night!'
+        );
     },
     ["Reloading", "Change Background", "Switch Avatar"], [() => {
         location.reload();
     }, fn8, fn9]);
-
 const wave = new WaveSet('.wave_container', 5, ["Change Background", "Switch Avatar"], [fn8, fn9], ["WorldV"]);
 const background_body = new RandomBackgroundImage('body', 1, 13, 1, 2, './img/Background/background', 'jpg');
 const avatar_img = new RandomBackgroundImage('.avatar_img', 1, 30, 1, 2, './img/Avatar/avatar', 'jpg');

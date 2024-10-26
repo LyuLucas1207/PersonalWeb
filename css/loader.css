@@ -253,3 +253,26 @@
     transition: all 0.3s ease-in-out;
 }
 
+
+@media screen and (max-width: 1000px) {
+    .loaderAfter_modal-content {
+        width: 80%;
+        height: 30%;
+    }
+
+    .loaderAfter_modal-content p {
+        font-size: 14px;
+    }
+
+    .loaderAfter_modal-content .button_container {
+        margin-top: 1vh;
+    }
+
+    .loaderAfter_modal-content-button {
+        width: 100px;
+        height: 40px;
+        font-size: 8px;
+        margin: 1vh 2vh;
+    }
+    
+}

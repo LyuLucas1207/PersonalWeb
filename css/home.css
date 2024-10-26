@@ -52,6 +52,12 @@
     border-radius: 9px
 }
 
+@media screen and (max-width: 500px) {
+    .home-container {
+        transform: scale(0.6)
+    }
+}
+
 .home-day {
     position: relative;
     box-sizing: border-box;
